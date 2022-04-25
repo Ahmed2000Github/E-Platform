@@ -1,7 +1,5 @@
 import 'dart:convert';
-
-import 'package:arcore_flutter_plugin_example/screens/scanne_list.dart';
-import 'package:arcore_flutter_plugin_example/screens/start_activity.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/scanne_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

@@ -1,8 +1,7 @@
-import 'package:arcore_flutter_plugin_example/screens/side_menu.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-import '../color.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/side_menu.dart';
+import 'package:flutter/material.dart';
+import '../../color.dart';
 import 'cours_list.dart';
 
 class StartActivity extends StatefulWidget {

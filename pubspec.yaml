@@ -15,7 +15,6 @@ dependencies:
   permission_handler: ^9.2.0
   path_provider: ^2.0.9
   http: ^0.13.4
-  flutter_svg_provider: ^1.0.3
   # downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:
