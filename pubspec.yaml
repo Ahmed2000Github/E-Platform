@@ -12,6 +12,11 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  permission_handler: ^9.2.0
+  path_provider: ^2.0.9
+  http: ^0.13.4
+  flutter_svg_provider: ^1.0.3
+  # downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:
   flutter_test:
@@ -29,14 +34,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  fonts:
+    - family: Updock
+      fonts:
+        - asset: assets/fonts/Updock-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/prova_texture.png
-    - assets/earth.jpg
-    - assets/earth_augmented_image.jpg
-    - assets/umano_digitale.png
-    - assets/myimages.imgdb
+    - assets/images/
+    - assets/svg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
