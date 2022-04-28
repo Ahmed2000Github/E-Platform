@@ -22,17 +22,17 @@ class _MultipleAugmentedImagesPageState
     DsitantImageAsset(
         id: "1",
         imageLink:
-            "https://github.com/Ahmed2000Github/Models/blob/master/prova_texture.png?raw=true",
+        "https://github.com/Ahmed2000Github/Models/blob/master/prova_texture.png?raw=true",
         imageName: "earth_augmented_image",
         modelLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/sun/sun.gltf"),
+        "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/sun/sun.gltf"),
     DsitantImageAsset(
         id: "2",
         imageLink:
-            "https://github.com/Ahmed2000Github/Models/blob/master/earth.jpg?raw=true",
+        "https://github.com/Ahmed2000Github/Models/blob/master/earth.jpg?raw=true",
         imageName: "prova_texture",
         modelLink:
-            "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF/Duck.gltf"),
+        "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/earth.gltf"),
   ];
   // ignore: avoid_init_to_null, non_constant_identifier_names
   String NameObject = null;

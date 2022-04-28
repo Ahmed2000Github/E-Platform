@@ -2,6 +2,7 @@ import 'package:arcore_flutter_plugin_example/Etudiant/screens/TextScanner/color
 import 'package:arcore_flutter_plugin_example/color.dart';
 import 'package:flutter/material.dart';
 
+import 'QrCodeScanner/new_scan_new_qr.dart';
 import 'cours_list.dart';
 import 'multiple_augmented_images.dart';
 import 'TextScanner/scan_text.dart';
@@ -169,7 +170,7 @@ class _ScanneList extends State<ScanneList> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CoursList()));
+                            builder: (context) => NewScanNewQr()));
                   }, // Handle your callback
                   child: Container(
                       margin: const EdgeInsets.all(5),
