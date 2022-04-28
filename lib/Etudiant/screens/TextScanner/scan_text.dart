@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/TextScanner/ar_activity.dart';
 import 'package:http/http.dart';
 
 import 'http_service.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as developer;
 import 'dart:io';
-import 'dart:io'as Io;
+import 'dart:io' as Io;
 import 'controls_widget.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
@@ -27,8 +28,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   final uri = Uri.parse('https://text-recog.herokuapp.com/identify');
 
   @override
-  Widget build(BuildContext context) =>
-      Expanded(
+  Widget build(BuildContext context) => Expanded(
         child: Column(
           children: [
             Expanded(child: buildImage()),
@@ -47,8 +47,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
         ),
       );
 
-  Widget buildImage() =>
-      Container(
+  Widget buildImage() => Container(
         child: image != null
             ? Image.file(image)
             : Icon(Icons.photo, size: 80, color: Colors.deepOrange),
@@ -61,17 +60,15 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   Future pickImageFromCamera() async {
     final file = await ImagePicker().getImage(source: ImageSource.gallery);
-    image=File(file.path);
+    image = File(file.path);
     Uint8List imagebytes = await image.readAsBytes(); //convert to bytes
-    String base64string = base64.encode(imagebytes); //convert bytes to base64 string
+    String base64string =
+        base64.encode(imagebytes); //convert bytes to base64 string
     developer.log('base64 before:' + base64string);
     print("Send post method");
     var color = [255, 0, 0];
     final headers = {'Content-Type': 'application/json'};
-    Map<String, dynamic> body = {
-      'color': color,
-      'bytes': base64string
-    };
+    Map<String, dynamic> body = {'color': color, 'bytes': base64string};
     String jsonBody = json.encode(body);
     final encoding = Encoding.getByName('utf-8');
     try {
@@ -79,27 +76,16 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
         uri,
         headers: headers,
         body: jsonBody,
-        encoding: encoding,);
+        encoding: encoding,
+      );
       print(response.statusCode);
       String responseBody = response.body;
       developer.log('base64 after:' + responseBody);
-        if (responseBody == null||responseBody.isEmpty)
-          return new Container();
-        Uint8List bytes = Base64Codec().decode(responseBody);
-
-      } catch (er) {
+      if (responseBody == null || responseBody.isEmpty) return new Container();
+      Uint8List bytes = Base64Codec().decode(responseBody);
+    } catch (er) {
       print(er.toString());
     }
-
-
-
-
-
-
-
-
-
-
 
 /*
     setState(() {
@@ -116,17 +102,20 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   Future scanText() async {
     showDialog(
-      builder: (context) =>
-          Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
-            ),
-          ), context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+        ),
+      ),
+      context: context,
     );
 
-    final text = await FirebaseMLApi.recogniseText(image);
-    setText(text);
-    Navigator.of(context).pop();
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => AugmentedTextScreen()));
+
+    // final text = await FirebaseMLApi.recogniseText(image);
+    // setText(text);
+    // Navigator.of(context).pop();
   }
 
   void clear() {
@@ -159,8 +148,6 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
       base64.decode(imagen),
       width: 200,
       fit: BoxFit.fitWidth,
-
     );
   }
 }
-
