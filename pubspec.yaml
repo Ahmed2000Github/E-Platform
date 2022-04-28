@@ -15,6 +15,11 @@ dependencies:
   permission_handler: ^9.2.0
   path_provider: ^2.0.9
   http: ^0.13.4
+  firebase_ml_vision: ^0.9.7
+  image_picker:
+  clipboard: ^0.1.2+8
+  image: ^3.0.2
+  flutter_colorpicker: ^1.0.3
   # downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:
