@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.difrancescogianmarco.hello"
+        applicationId "com.difrancescogianmarco.example"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
@@ -92,3 +92,5 @@ sceneform.asset('sampledata/fox_face.fbx',
         'sampledata/fox_face_material.mat',
         'sampledata/fox_face.sfa',
         'src/main/assets/fox_face')
+
+apply plugin: 'com.google.gms.google-services'

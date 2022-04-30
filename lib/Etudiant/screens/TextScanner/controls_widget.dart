@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ControlsWidget extends StatelessWidget {
   final VoidCallback onClickedPickImage;
+  final VoidCallback onClickedTakeImage;
   final VoidCallback onClickedScanText;
   final VoidCallback onClickedClear;
 
@@ -9,6 +10,7 @@ class ControlsWidget extends StatelessWidget {
     @required this.onClickedPickImage,
     @required this.onClickedScanText,
     @required this.onClickedClear,
+    @required this.onClickedTakeImage,
     Key key,
   }) : super(key: key);
 
@@ -20,13 +22,20 @@ class ControlsWidget extends StatelessWidget {
             onPressed: onClickedPickImage,
             child: Text('Pick Image'),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 8),
+          ElevatedButton(
+            onPressed: onClickedTakeImage,
+            child: Text('Take Image'),
+          ),
+          const SizedBox(width: 8),
           ElevatedButton(
             onPressed: onClickedScanText,
-            child: Text('Scan For Text',  style: TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
+            child: Text(
+              'Scan For Text',
+              style: TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 8),
           ElevatedButton(
             onPressed: onClickedClear,
             child: Text('Clear'),

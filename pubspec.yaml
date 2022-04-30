@@ -20,6 +20,8 @@ dependencies:
   clipboard: ^0.1.2+8
   image: ^3.0.2
   flutter_colorpicker: ^1.0.3
+  barcode_scan2: ^4.2.0
+  flutter_native_image: ^0.0.6
   # downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:
