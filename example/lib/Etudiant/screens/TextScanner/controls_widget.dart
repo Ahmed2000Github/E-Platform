@@ -3,13 +3,9 @@ import 'package:flutter/material.dart';
 class ControlsWidget extends StatelessWidget {
   final VoidCallback onClickedPickImage;
   final VoidCallback onClickedTakeImage;
-  final VoidCallback onClickedScanText;
-  final VoidCallback onClickedClear;
 
   const ControlsWidget({
     @required this.onClickedPickImage,
-    @required this.onClickedScanText,
-    @required this.onClickedClear,
     @required this.onClickedTakeImage,
     Key key,
   }) : super(key: key);
@@ -28,18 +24,6 @@ class ControlsWidget extends StatelessWidget {
             child: Text('Take Image'),
           ),
           const SizedBox(width: 8),
-          ElevatedButton(
-            onPressed: onClickedScanText,
-            child: Text(
-              'Scan For Text',
-              style: TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
-            ),
-          ),
-          const SizedBox(width: 8),
-          ElevatedButton(
-            onPressed: onClickedClear,
-            child: Text('Clear'),
-          )
         ],
       );
 }

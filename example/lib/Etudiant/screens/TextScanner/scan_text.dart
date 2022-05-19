@@ -41,10 +41,26 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
                   ControlsWidget(
                     onClickedPickImage: pickImageFromGallery,
                     onClickedTakeImage: pickImageFromCamera,
-                    onClickedScanText: scanText,
-                    onClickedClear: clear,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(width: 7),
+                  image != null
+                      ? ElevatedButton(
+                          onPressed: clear,
+                          child: Text('Clear'),
+                        )
+                      : const SizedBox(width: 1),
+                  filteredImage != null
+                      ? ElevatedButton(
+                          onPressed: scanText,
+                          child: Text(
+                            'Scan For Text',
+                            style:
+                                TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
+                          ),
+                        )
+                      : SizedBox(
+                          width: 8,
+                        ),
                 ],
               )
             : Column(
