@@ -1,76 +1,35 @@
-name: arcore_flutter_plugin_example
-description: Demonstrates how to use the arcore_flutter_plugin plugin.
-publish_to: "none"
+name: arcore_flutter_plugin
+description: Flutter plugin for ARCore SDK, Android platform to build new augmented reality experiences
+version: 0.0.11
+homepage: https://github.com/giandifra/arcore_flutter_plugin
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.1.0 <3.0.0'
+  flutter: '>=1.10.0 <2.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  permission_handler: ^9.2.0
-  path_provider: ^2.0.9
-  http: ^0.13.4
-  firebase_ml_vision: ^0.9.7
-  image_picker:
-  clipboard: ^0.1.2+8
-  image: ^3.0.2
-  flutter_colorpicker: ^1.0.3
-  barcode_scan2: ^4.2.0
-  flutter_native_image: ^0.0.6
-  # downloads_path_provider_28: ^0.1.2
+  vector_math: ^2.0.8
+  meta: ^1.1.8
+  equatable: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  arcore_flutter_plugin:
-    # path: ../
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
-  fonts:
-    - family: Updock
-      fonts:
-        - asset: assets/fonts/Updock-Regular.ttf
-  # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/
-    - assets/svg/
+  # This section identifies this Flutter project as a plugin project.
+  # The androidPackage and pluginClass identifiers should not ordinarily
+  # be modified. They are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
+  plugin:
+    platforms:
+      android:
+        package: com.difrancescogianmarco.arcore_flutter_plugin
+        pluginClass: ArcoreFlutterPlugin
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
