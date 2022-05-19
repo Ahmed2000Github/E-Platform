@@ -33,48 +33,34 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
 
   @override
   Widget build(BuildContext context) => Expanded(
-        child: (modelsList.isEmpty || modelsList == null)
-            ? Column(
-                children: [
-                  Expanded(child: buildImage()),
-                  const SizedBox(height: 16),
-                  ControlsWidget(
-                    onClickedPickImage: pickImageFromGallery,
-                    onClickedTakeImage: pickImageFromCamera,
+        child: Column(
+          children: [
+            Expanded(child: buildImage()),
+            const SizedBox(height: 16),
+            ControlsWidget(
+              onClickedPickImage: pickImageFromGallery,
+              onClickedTakeImage: pickImageFromCamera,
+            ),
+            const SizedBox(width: 7),
+            image != null
+                ? ElevatedButton(
+                    onPressed: clear,
+                    child: Text('Clear'),
+                  )
+                : const SizedBox(width: 1),
+            filteredImage != null
+                ? ElevatedButton(
+                    onPressed: scanText,
+                    child: Text(
+                      'Scan For Text',
+                      style: TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
+                    ),
+                  )
+                : SizedBox(
+                    width: 8,
                   ),
-                  const SizedBox(width: 7),
-                  image != null
-                      ? ElevatedButton(
-                          onPressed: clear,
-                          child: Text('Clear'),
-                        )
-                      : const SizedBox(width: 1),
-                  filteredImage != null
-                      ? ElevatedButton(
-                          onPressed: scanText,
-                          child: Text(
-                            'Scan For Text',
-                            style:
-                                TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
-                          ),
-                        )
-                      : SizedBox(
-                          width: 8,
-                        ),
-                ],
-              )
-            : Column(
-                children: [
-                  modelsFound
-                      ? Navigator.push(
-                          context,
-                          // new MaterialPageRoute(builder: (context) => new RemoteObject(modelUrl: label,)));
-                          new MaterialPageRoute(
-                              builder: (context) =>
-                                  new TextArViewScreen(modelsList: modelsList)))
-                      : Text("no model found !"),
-                ],
-              ),
+          ],
+        ),
       );
 
   Widget buildImage() => Container(
@@ -178,6 +164,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     //change the state
     setModelsList(fetchedList);
     setModelsFound(true);
+    if (modelsFound) {
+      Navigator.push(
+          context,
+          new MaterialPageRoute(
+              builder: (context) =>
+                  new TextArViewScreen(modelsList: modelsList)));
+    }
   }
 
   void clear() {
