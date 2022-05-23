@@ -73,12 +73,14 @@ class _ChapitresList extends State<ChapitresList> {
                       onTap: () {
                         getItemAndNavigate(snapshot.data[index].id, context);
                       },
-                      child: Card(
+                      child: 
+                      
+                      Card(
                         child:Center(
                           child: Column(children: [
                           SizedBox(height: 8,),
                          Image.network(  'https://picsum.photos/250?image=9', 
-                         width: 100,),
+                         width: MediaQuery.of(context).size.width * 0.22,),
                          ListTile(
                           // leading: CircleAvatar(backgroundImage: AssetImage(images[index]),),
                           title: Text('chapitre'),

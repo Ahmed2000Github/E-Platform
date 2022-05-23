@@ -22,6 +22,10 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   barcode_scan2: ^4.2.0
   flutter_native_image: ^0.0.6
+  google_fonts: ^2.3.2
+  flutter_svg: ^1.0.3
+  curved_navigation_bar: ^0.3.2
+  rxdart: ^0.27.3
   sqflite:
   path:
 
@@ -33,7 +37,17 @@ dev_dependencies:
 
   arcore_flutter_plugin:
     path: ../
+  flutter_native_splash: ^1.2.3
 
+flutter_native_splash:
+  # background_image: "assets/images/launch_image.jpg"
+  color: "#0F52BA"
+  android: true
+  ios: true
+  android_gravity: center
+  ios_content_mode: center
+  image: assets/images/launch_image.png
+  fullscreen: true
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 

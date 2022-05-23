@@ -1,12 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/scanne_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 import '../models/distant_image_asset.dart';
-import 'cours_list.dart';
 
 class MultipleAugmentedImagesPage extends StatefulWidget {
   @override
@@ -47,7 +47,7 @@ class _MultipleAugmentedImagesPageState
             onPressed: (() {
              Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => CoursList())
+                                builder: (context) => ScanneList())
                                 ,
                  (Route<dynamic> route) => false,
                                 );
@@ -99,7 +99,7 @@ class _MultipleAugmentedImagesPageState
           scale: vector.Vector3.all(0.15),
           name: asset.modeleName,
           objectUrl: asset.modelLink,
-           // scale: vector.Vector3(size, size, size),
+          //  scale: vector.Vector3(size, size, size),
           // position: augmentedImage.centerPose.translation,
           // rotation: augmentedImage.centerPose.rotation
         );
