@@ -97,23 +97,26 @@ class ChoiceListView extends StatelessWidget {
                   onTap: () {
                     switch (scanChoice.choiceId) {
                       case 1:
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    MultipleAugmentedImagesPage()));
+                                    MultipleAugmentedImagesPage()),
+                    (Route<dynamic> route) => false,);
                         break;
                       case 2:
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NewScanNewQr()));
+                                builder: (context) => NewScanNewQr()),
+                    (Route<dynamic> route) => false,);
                         break;
                       case 3:
-                        Navigator.push(
+                        Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ColorPickerScreen()));
+                                builder: (context) => ColorPickerScreen()),
+                    (Route<dynamic> route) => false,);
                         break;
                       default:
                     }

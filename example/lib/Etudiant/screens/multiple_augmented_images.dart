@@ -39,8 +39,15 @@ class _MultipleAugmentedImagesPageState
   ];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return WillPopScope(
+      // ignore: missing_return
+      onWillPop: () {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ScanneList()),
+          (Route<dynamic> route) => false,
+        );
+      },
+      child: Scaffold(
         appBar: AppBar(
           title: const Text('Multiple augmented images'),
           leading: IconButton(

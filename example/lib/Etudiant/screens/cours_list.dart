@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:arcore_flutter_plugin_example/Etudiant/models/etudiant_data.dart';
-import 'package:arcore_flutter_plugin_example/Etudiant/screens/start_activity.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../models/cours.dart';
@@ -34,7 +34,7 @@ class _CoursList extends State<CoursList> {
       // ignore: missing_return
       onWillPop: () {
         Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => StartActivity()),
+          MaterialPageRoute(builder: (context) => WelcomePage()),
           (Route<dynamic> route) => false,
         );
       },
@@ -56,7 +56,7 @@ class _CoursList extends State<CoursList> {
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => StartActivity()),
+                MaterialPageRoute(builder: (context) => WelcomePage()),
                 (Route<dynamic> route) => false,
               );
             },

@@ -33,8 +33,7 @@ class _ChapitresList extends State<ChapitresList> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: WillPopScope(
+    return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
         Navigator.of(context).pushAndRemoveUntil(
@@ -42,7 +41,7 @@ class _ChapitresList extends State<ChapitresList> {
           (Route<dynamic> route) => false,
         );
       },
-      child: Scaffold(
+      child:Scaffold(
         appBar: AppBar(
           title: Text('liste des Chapitres'),
           actions: <Widget>[
@@ -118,7 +117,7 @@ class _ChapitresList extends State<ChapitresList> {
           },
         ),
       ),
-    ));
+    );
   }
 
   Future<List<Chapitres>> fetchUsers() async {
@@ -131,9 +130,10 @@ class _ChapitresList extends State<ChapitresList> {
 
   getItemAndNavigate(int item, BuildContext context) {
     this.etudiantDataProvider.update(new EtudiantData(id: 1,coursId: etudiantData.coursId, chapitreId: item));
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => ScanneList()),
-      (Route<dynamic> route) => false,
-    );
+    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ScanneList()));
   }
 }

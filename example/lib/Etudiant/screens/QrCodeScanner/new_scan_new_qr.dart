@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/scanne_list.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,10 +45,26 @@ class _AppStateQr extends State<NewScanNewQr> {
     // _scan(context);
     final scanResult = this.scanResult;
     final scanResultat = this.scanResultat;
-    return MaterialApp(
-      home: Scaffold(
+    return WillPopScope(
+      // ignore: missing_return
+      onWillPop: () {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ScanneList()),
+          (Route<dynamic> route) => false,
+        );
+      },
+      child: Scaffold(
           appBar: AppBar(
             title: const Text('Qr Code Scanner'),
+             leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => ScanneList()),
+                (Route<dynamic> route) => false,
+              );
+            },
+            icon: Icon(Icons.arrow_back),
+          ),
           ),
           body: Column(
             children: [
