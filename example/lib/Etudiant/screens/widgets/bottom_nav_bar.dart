@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
               height: SizeConfig.screenHeight*.45,
               decoration: BoxDecoration(
               // color: Color.fromRGBO(137,198,240,0.4),
-              color: Colors.blue,
+               color: Colors.blueAccent[700],
               image: DecorationImage(
                 alignment: Alignment.centerLeft,
                 image: AssetImage("assets/images/undraw_pilates_gpdb.png"),
@@ -40,7 +40,7 @@ class BottomNavBar extends StatelessWidget {
                       height: 52,
                       width: 52,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                       color: Colors.blueAccent[700],
                         shape: BoxShape.circle,
                       ),
                       child: SvgPicture.asset("assets/images/menu.svg"),
