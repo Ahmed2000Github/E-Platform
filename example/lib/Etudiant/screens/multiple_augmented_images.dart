@@ -7,6 +7,7 @@ import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 import '../models/distant_image_asset.dart';
+import 'cours_list.dart';
 
 class MultipleAugmentedImagesPage extends StatefulWidget {
   @override
@@ -17,11 +18,11 @@ class MultipleAugmentedImagesPage extends StatefulWidget {
 class _MultipleAugmentedImagesPageState
     extends State<MultipleAugmentedImagesPage> {
   ArCoreController arCoreController;
+  int ind = -1;
+  int counter = 0;
   Map<String, ArCoreAugmentedImage> augmentedImagesMap = Map();
   Map<String, Uint8List> bytesMap = Map();
-
-  // creation et initialisation de la variable qui contient les modeles et leurs images associees
-  List<DsitantImageAsset> distantImages = [
+   List<DsitantImageAsset> distantImages = [
     DsitantImageAsset(
         id: "1",
         imageLink:
@@ -37,6 +38,8 @@ class _MultipleAugmentedImagesPageState
         modelLink:
             "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/sun/sun.gltf"),
   ];
+  // ignore: avoid_init_to_null, non_constant_identifier_names
+  String NameObject = "";
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -47,18 +50,28 @@ class _MultipleAugmentedImagesPageState
           (Route<dynamic> route) => false,
         );
       },
-      child: Scaffold(
+      child:Scaffold(
         appBar: AppBar(
           title: const Text('Multiple augmented images'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.refresh),
+              tooltip: 'Refresh',
+              iconSize: 40,
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => MultipleAugmentedImagesPage()),
+                (Route<dynamic> route) => false,
+              );
+              },
+            ), //IconButton
+          ],
           leading: IconButton(
             onPressed: (() {
-             Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => ScanneList())
-                                ,
-                 (Route<dynamic> route) => false,
-                                );
-                      
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => CoursList()),
+                (Route<dynamic> route) => false,
+              );
             }),
             icon: Icon(Icons.arrow_back),
           ),
@@ -67,14 +80,48 @@ class _MultipleAugmentedImagesPageState
           onArCoreViewCreated: _onArCoreViewCreated,
           type: ArCoreViewType.AUGMENTEDIMAGES,
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          // isExtended: true,
+          child: Icon(
+            Icons.delete,
+          ),
+          backgroundColor: Colors.green,
+          onPressed: () {
+            if (ind != -1) {
+              showDialog<void>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  content: Row(
+                    children: <Widget>[
+                      Text(
+                        'Voulez vous supprimmer ce modele ?\n\n il faut actualiser la page pour afficher ce modele',
+                        style: TextStyle(fontSize: 10,
+                        color: Colors.red),
+                      ),
+                      IconButton(
+                          icon: Icon(
+                            Icons.delete,
+                          ),
+                          onPressed: () {
+                            arCoreController.removeNodeWithIndex(ind);
+                            Navigator.pop(context);
+                            ind = -1;
+                          })
+                    ],
+                  ),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }
 
-// creation de vue AR et chargement des images
+// creation sde vue AR et chargement des images
   void _onArCoreViewCreated(ArCoreController controller) async {
     arCoreController = controller;
-    arCoreController.onNodeTap = (name) => onTapHandler(name);
     arCoreController.onTrackingImage = _handleOnTrackingImage;
     loadMultipleImage();
   }
@@ -99,47 +146,23 @@ class _MultipleAugmentedImagesPageState
 
 // ajoute du modele correspondant au image detecter a la scene ou vue AR
   Future _addModel(ArCoreAugmentedImage augmentedImage) async {
-    double size = augmentedImage.extentX / 2;
     for (var asset in distantImages) {
       if (asset.modeleName == augmentedImage.name) {
+        if (NameObject != "" && NameObject != asset.modeleName) {
+          arCoreController.removeNodeWithIndex(ind);
+        }
+        NameObject = asset.modeleName;
+        ind = augmentedImage.index;
         final node = ArCoreReferenceNode(
           scale: vector.Vector3.all(0.15),
           name: asset.modeleName,
           objectUrl: asset.modelLink,
-          //  scale: vector.Vector3(size, size, size),
-          // position: augmentedImage.centerPose.translation,
-          // rotation: augmentedImage.centerPose.rotation
         );
 
-        arCoreController.addArCoreNodeToAugmentedImage(
-            node, augmentedImage.index);
+        arCoreController.addArCoreNodeToAugmentedImage(node, ind);
       }
     }
   }
-
-// lors de click sur le modele il va etre supprimer
-  void onTapHandler(String name) {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: Row(
-          children: <Widget>[
-            Text('Remove $name?'),
-            IconButton(
-                icon: Icon(
-                  Icons.delete,
-                ),
-                onPressed: () {
-                  arCoreController.removeNode(nodeName: name);
-                  Navigator.pop(context);
-                })
-          ],
-        ),
-      ),
-    );
-  }
-  
-
   @override
   void dispose() {
     arCoreController.dispose();
