@@ -36,7 +36,7 @@ dev_dependencies:
     sdk: flutter
 
   arcore_flutter_plugin:
-    path: ../
+    # path: ../
   flutter_native_splash: ^1.2.3
 
 flutter_native_splash:
