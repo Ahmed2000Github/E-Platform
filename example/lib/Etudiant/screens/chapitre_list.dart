@@ -130,10 +130,9 @@ class _ChapitresList extends State<ChapitresList> {
 
   getItemAndNavigate(int item, BuildContext context) {
     this.etudiantDataProvider.update(new EtudiantData(id: 1,coursId: etudiantData.coursId, chapitreId: item));
-    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ScanneList()));
+     Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ScanneList()),
+          (Route<dynamic> route) => false,
+        );
   }
 }

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import '../scanne_list.dart';
 import 'scan_text.dart';
 
 class ColorPickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
+    return WillPopScope(
+      // ignore: missing_return
+      onWillPop: () {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => ScanneList()),
+          (Route<dynamic> route) => false,
+        );
+      },
+      child:Home(),
     );
   }
 }
@@ -24,6 +32,14 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text("Flutter Color Picker"),
           backgroundColor: Colors.redAccent,
+          leading: IconButton(
+             icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => ScanneList()),
+                (Route<dynamic> route) => false,
+              );
+            },)
         ),
         body: Container(
             color: mycolor, //background color of app from color picker
