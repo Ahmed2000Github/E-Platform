@@ -9,6 +9,15 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>CoursList()));
+          },
+        child: Text('Liste des cours',
+        style: TextStyle(fontSize: 23),),
+      ),
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.blueAccent,
         items: <Widget>[
@@ -24,7 +33,7 @@ class MainPage extends StatelessWidget {
              Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomePage()));
               break;
             case 1:
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>CoursList()));
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomePage()));
               break;
             case 2:
              Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomePage()));

@@ -69,7 +69,7 @@ class _MultipleAugmentedImagesPageState
           leading: IconButton(
             onPressed: (() {
               Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => CoursList()),
+                MaterialPageRoute(builder: (context) => ScanneList()),
                 (Route<dynamic> route) => false,
               );
             }),

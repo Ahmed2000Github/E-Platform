@@ -28,7 +28,6 @@ dependencies:
   rxdart: ^0.27.3
   sqflite:
   path:
- 
 
   # downloads_path_provider_28: ^0.1.2
 
@@ -47,7 +46,7 @@ flutter_native_splash:
   ios: true
   android_gravity: center
   ios_content_mode: center
-  image: assets/images/launch_image.png
+  image: assets/images/ARLogomdpi.png
   fullscreen: true
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
