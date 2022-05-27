@@ -1,8 +1,52 @@
-import 'package:arcore_flutter_plugin_example/Professeur/screens/views/CameraDetection.dart';
-import 'package:arcore_flutter_plugin_example/Professeur/screens/views/LunchCamera.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/ScanScreen.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/CameraDetection.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/LunchCamera.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/GetLevels.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/StartCamera.dart';
+
+void main() {
+  //Widget App // Material App //CupertionApp
+  runApp(MaterialApp(
+    home: HomePage(),
+    theme: ThemeData(primarySwatch: Colors.blue),
+    routes: {
+      "/ScanScreen": (context) => ScanScreen(),
+      "/CameraDetection": (context) => CameraDetection(),
+      "/LunchCamera":(context) => LunchCamera(),
+      "/GetLevels":(context) => GetLevels(),
+      "/StartCamera":(context) => StartCamera()
+    },
+  ));
+}
+class HomePage extends StatelessWidget {
+  // const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text("Gestion de présence")
+      ),
+      body: Center(
+        child: Text('ESPACE PROFESSEUR')
+      ),
+      drawer: drawer(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.search),
+        mini: true,
+        hoverColor: Colors.black,
+      ),
+    );
+  }
+}
 
 class drawer extends StatelessWidget {
+  // const drawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +68,11 @@ class drawer extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
-                // Navigator.of(context).pop();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => ScanScreen()),
-                // );
-                },
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScanScreen()),
+                );},
               leading: Icon(
                   Icons.qr_code,
                   color: Colors.black

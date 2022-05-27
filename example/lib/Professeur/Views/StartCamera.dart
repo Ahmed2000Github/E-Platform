@@ -1,14 +1,15 @@
 import 'dart:io';
 
-
-import 'package:arcore_flutter_plugin_example/Professeur/screens/views/CameraDetection.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/CameraDetection.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/GetLevels.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/ScanScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'dart:developer';
-import '../../models/Filiere.dart';
+import '../backend/Filiere.dart';
 import 'globals.dart' as globals;
 
 class StartCamera extends StatefulWidget {

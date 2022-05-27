@@ -1,3 +1,4 @@
+import 'package:arcore_flutter_plugin_example/Professeur/Views/ScanScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -104,11 +105,11 @@ class _CameraDetectionState extends State<CameraDetection> {
                                           )),
                                       IconButton(
                                           onPressed: () {
-                      //                       Navigator.of(context).pop();
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => ScanScreen()),
-                      // );
+                                            Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ScanScreen()),
+                      );
                                           },
                                           icon: Icon(
                                             Icons.qr_code,

@@ -1,50 +1,50 @@
-
-import 'package:arcore_flutter_plugin_example/Professeur/screens/views/GetLevels.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/ScanScreen.dart';
+import 'package:arcore_flutter_plugin_example/Professeur/Views/StartCamera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:developer';
-import '../../models/Filiere.dart';
+import '../backend/Niveau.dart';
 import 'globals.dart' as globals;
 
-class LunchCamera extends StatefulWidget {
+class GetLevels extends StatefulWidget {
   @override
-  _LunchCameraState createState() => _LunchCameraState();
+  _GetLevelsState createState() => _GetLevelsState();
 }
 
-class _LunchCameraState extends State<LunchCamera> {
-  Future<List<Filiere>> filieres;
-  final filieresListKey = GlobalKey<_LunchCameraState>();
+class _GetLevelsState extends State<GetLevels> {
+  Future<List<Niveau>> niveaus;
+  final niveausListKey = GlobalKey<_GetLevelsState>();
 
   @override
   void initState() {
     super.initState();
-    filieres = getFilieresList();
+    niveaus = getNiveausList();
   }
 
-  Future<List<Filiere>> getFilieresList() async {
+  Future<List<Niveau>> getNiveausList() async {
     final response =
-        await http.get(Uri.parse("http://192.168.1.7:8000/mobile/filieres"));
+        await http.get(Uri.parse("http://192.168.1.7:8000/mobile/niveau/"+globals.selectedFiliere));
 
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
-    List<Filiere> filieres = items.map<Filiere>((json) {
-      return Filiere.fromJson(json);
+    List<Niveau> niveaus = items.map<Niveau>((json) {
+      return Niveau.fromJson(json);
     }).toList();
 
-    return filieres;
+    return niveaus;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: filieresListKey,
+      key: niveausListKey,
       appBar: AppBar(
-        title: Text('Filiere List'),
+        title: Text('Niveau List'),
       ),
       body: Center(
-        child: FutureBuilder<List<Filiere>>(
-          future: filieres,
+        child: FutureBuilder<List<Niveau>>(
+          future: niveaus,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             // By default, show a loading spinner.
             if (!snapshot.hasData) return CircularProgressIndicator();
@@ -57,17 +57,15 @@ class _LunchCameraState extends State<LunchCamera> {
                   child: ListTile(
                     leading: Icon(Icons.person),
                     title: Text(
-                      data.nom_filiere,
+                      data.nom_niveau,
                       style: TextStyle(fontSize: 20),
                     ),
                     onTap: () {
-                      globals.selectedFiliere = data.nom_filiere;
-                      Navigator.of(context).pop();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => GetLevels()),
-                      );
-                    },
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => StartCamera()),
+                  );},
                   ),
                 );
               },
