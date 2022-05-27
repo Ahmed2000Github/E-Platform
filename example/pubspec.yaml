@@ -28,6 +28,9 @@ dependencies:
   rxdart: ^0.27.3
   sqflite:
   path:
+  barcode_widget: ^2.0.2
+  flutter_barcode_scanner: ^2.0.0
+  dropdown_search: ^3.0.1
 
   # downloads_path_provider_28: ^0.1.2
 
@@ -65,6 +68,9 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/hishem.png
+    - assets/qrcode.png
+    - assets/user.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
