@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../size_configs.dart';
 import '../views/sign_up_page.dart';
+import '../../../Professor/screens/views/sign_up_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -79,7 +80,11 @@ class BottomNavBar extends StatelessWidget {
                          CategoryCard(
                          title: "Teacher Area",
                          svgSrc: "assets/images/prof.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: (context)=>SignUpPageProf())
+                            );
+                          },
                         ), // categorycard
                           CategoryCard(
                          title: "Student Area",
