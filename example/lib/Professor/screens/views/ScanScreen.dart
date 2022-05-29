@@ -53,7 +53,7 @@ class _ScanScreenState extends State<ScanScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/qrcode.png',
+                  'assets/prof/qrcode.png',
                   height: 100,
                   width: 50,
                 ),
@@ -72,7 +72,7 @@ class _ScanScreenState extends State<ScanScreen> {
                     child: ListTile(
                   leading: CircleAvatar(
                     backgroundImage: AssetImage(
-                      "assets/user.png",
+                      "assets/prof/user.png",
                     ),
                   ),
                   title: Text(qrstr),

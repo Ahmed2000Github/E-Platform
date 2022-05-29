@@ -1,3 +1,4 @@
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/CameraDetection.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
@@ -119,7 +120,7 @@ final _animationDuration = const Duration(milliseconds: 500);
                         onTap: () {
                           Navigator.push(
                              context,
-                           MaterialPageRoute(builder: (context) => const SchedulerPage()),
+                           MaterialPageRoute(builder: (context) =>  CameraDetection()),
                             );
                         },
                       ),
