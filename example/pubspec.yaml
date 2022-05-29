@@ -25,12 +25,15 @@ dependencies:
   google_fonts: ^2.3.2
   flutter_svg: ^1.0.3
   curved_navigation_bar: ^0.3.2
+  dio: ^1.0.13
+  font_awesome_flutter: ^8.2.0
   rxdart: ^0.27.3
   sqflite:
   path:
   barcode_widget: ^2.0.2
   flutter_barcode_scanner: ^2.0.0
   dropdown_search: ^3.0.1
+  edge_detection: ^1.0.9
 
   # downloads_path_provider_28: ^0.1.2
 
