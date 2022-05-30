@@ -18,34 +18,38 @@ class _MainPageState extends State<MainPage>  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: 
+       Align(
+       alignment: Alignment.center,
+       child: ListView(
+        shrinkWrap: true,
         scrollDirection: Axis.vertical,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.all(20),
             child: Container(
               child: new FittedBox(
                 child: Material(
                     color: Colors.white,
-                    elevation: 14.0,
-                    borderRadius: BorderRadius.circular(24.0),
+                    elevation: 10.0,
+                    borderRadius: BorderRadius.circular(10.0),
                     shadowColor: Color(0x802196F3),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
+                            padding: const EdgeInsets.only(left: 10.0),
                             child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 10.0),
           child: Container(child: Text("Check my lessons",
-            style: TextStyle(color: Color(0xffe6020a), fontSize: 24.0,fontWeight: FontWeight.bold),)),
+            style: TextStyle(color: Color(0xFF1BB5FD), fontSize: 10),)),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 10.0),
           child: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,8 +59,8 @@ class _MainPageState extends State<MainPage>  {
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>CoursList()));
                    },
-                  child: Text('Liste des cours',
-                  style: TextStyle(fontSize: 23),),
+                  child: Text('My lessons',
+                  style: TextStyle(color: Colors.blueAccent[700],fontSize: 10),),
                   ),
                   ),
                 ],)),
@@ -66,15 +70,15 @@ class _MainPageState extends State<MainPage>  {
                           ),
                         ),
                         Container(
-                          width: 250,
-                          height: 200,
+                          width: 50,
+                          height: 50,
                           child: ClipRRect(
-                            borderRadius: new BorderRadius.circular(24.0),
+                            borderRadius: new BorderRadius.circular(10.0),
                             child: Image(
                               fit: BoxFit.contain,
                               alignment: Alignment.topRight,
                               image: NetworkImage(
-                                  "https://patrice-hardouin.canoprof.fr/eleve/PSE%20BacPro/Exemple_sequence_inversee/Approche%20par%20le%20risque/res/Books-3-300px.png"),
+                                  "https://static.vecteezy.com/system/resources/previews/002/896/415/original/books-illustration-cartoon-books-books-vector.jpg"),
                             ),
                           ),),
                       ],)
@@ -82,71 +86,60 @@ class _MainPageState extends State<MainPage>  {
               ),
             ),
           ),
-           Padding(
-            padding: const EdgeInsets.all(16.0),
+          Padding(
+            padding: const EdgeInsets.all(20),
             child: Container(
               child: new FittedBox(
                 child: Material(
                     color: Colors.white,
-                    elevation: 14.0,
-                    borderRadius: BorderRadius.circular(24.0),
+                    elevation: 10.0,
+                    borderRadius: BorderRadius.circular(10.0),
                     shadowColor: Color(0x802196F3),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
+                            padding: const EdgeInsets.only(left: 10.0),
                             child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Container(child: Text("Take A screenshot",
-            style: TextStyle(color: Color(0xffe6020a), fontSize: 24.0,fontWeight: FontWeight.bold),)),
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Container(child: Text("Store picture's dimension",
+            style: TextStyle(color: Color(0xFF1BB5FD), fontSize: 10),)),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Container(child: Row(children: <Widget>[
-            // Container(child: Text("3.5", style: TextStyle(
-            //   color: Colors.black54, fontSize: 18.0,),)),
-            // Container(child: Icon(
-            //   FontAwesomeIcons.solidStar, color: Colors.amber, size: 15.0,),),
-            // Container(child: Icon(
-            //   FontAwesomeIcons.solidStar, color: Colors.amber, size: 15.0,),),
-            // Container(child: Icon(
-            //   FontAwesomeIcons.solidStar, color: Colors.amber, size: 15.0,),),
-            // Container(child: Icon(
-            //   FontAwesomeIcons.solidStarHalf, color: Colors.amber,
-            //   size: 15.0,),),
-            Center(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Center(
                   child: TextButton(
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenPage()));
                    },
-                  child: Text('take a screenshot now',
-                  style: TextStyle(fontSize: 23),),
+                  child: Text('Crop and scan',
+                  style: TextStyle(color: Colors.blueAccent[700],fontSize: 10),),
                   ),
                   ),
-          ],)),
-        ),
-        // Container(child: Text("Pastries \u00B7 Phoenix,AZ",
-        //   style: TextStyle(color: Colors.black54, fontSize: 18.0,),)),
-      ],
-    ),
+                ],)),
+                   ),
+                    ],
+                    ),
                           ),
                         ),
-
                         Container(
-                          width: 250,
-                          height: 180,
+                          width: 50,
+                          height: 50,
                           child: ClipRRect(
-                            borderRadius: new BorderRadius.circular(24.0),
+                            borderRadius: new BorderRadius.circular(10.0),
                             child: Image(
                               fit: BoxFit.contain,
                               alignment: Alignment.topRight,
                               image: NetworkImage(
-                                  "https://img.modradar.net/source/blog/human-hand-holding-mobile-phone.jpg"),
+                                  "https://gadgetshelp.com/wp-content/uploads/images/lfw/87081d6dfc354a3c4c0b83d0ee3e8e35.jpg"),
                             ),
                           ),),
                       ],)
@@ -154,7 +147,10 @@ class _MainPageState extends State<MainPage>  {
               ),
             ),
           ),
+           
+
           ],
+          ),
           ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.blueAccent,
