@@ -6,6 +6,7 @@ import 'package:arcore_flutter_plugin_example/Etudiant/screens/widgets/menu_item
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/scheduler_page.dart';
 
 import '../views/ScanScreen.dart';
+import '../views/LunchCamera.dart';
 
 
 class SideBar extends StatefulWidget {
@@ -137,7 +138,7 @@ final _animationDuration = const Duration(milliseconds: 500);
                         onTap: () {
                           Navigator.push(
                              context,
-                           MaterialPageRoute(builder: (context) => const SchedulerPage()),
+                           MaterialPageRoute(builder: (context) =>  LunchCamera()),
                             );
                         },
                       ),
