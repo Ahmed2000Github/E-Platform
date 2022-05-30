@@ -46,6 +46,7 @@ class _ScanScreenState extends State<ScanScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Scanning QR Code'),
+          backgroundColor: Colors.blue[900],
         ),
         body: Center(
           child: Column(
@@ -66,7 +67,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 //Condition
 
                 qrstr == '' ? 
-                Text("Scanner un étudiant")
+                Text("Aucun étudiant n'est scanné")
                 :
                 Card(
                     child: ListTile(
@@ -78,7 +79,7 @@ class _ScanScreenState extends State<ScanScreen> {
                   title: Text(qrstr),
                   subtitle: Text(""),
                   isThreeLine: true,
-                  trailing: Icon(Icons.delete),
+                  trailing: Icon(Icons.check),
                   contentPadding: const EdgeInsets.all(4),
                 )),
                 
