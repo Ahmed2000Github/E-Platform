@@ -22,21 +22,56 @@ class _MultipleAugmentedImagesPageState
   int counter = 0;
   Map<String, ArCoreAugmentedImage> augmentedImagesMap = Map();
   Map<String, Uint8List> bytesMap = Map();
-   List<DsitantImageAsset> distantImages = [
+  List<DsitantImageAsset> distantImages = [
     DsitantImageAsset(
         id: "1",
         imageLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth.jpg",
+            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/cheval.jpeg",
         modeleName: "earth_augmented_image",
         modelLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/earth.gltf"),
+            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/Cheval.glb"),
     DsitantImageAsset(
         id: "2",
         imageLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/Sun.jpg",
+            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/lucan.jpeg",
         modeleName: "prova_texture",
         modelLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/sun/sun.gltf"),
+            "https://github.com/Ahmed2000Github/Models/raw/master/Lucane.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/animal.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/animal.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/papillon.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/Papillon%20monarque.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/souris.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/Souris.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/snail.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/snail.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/bee.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/Bee.glb"),
   ];
   // ignore: avoid_init_to_null, non_constant_identifier_names
   String NameObject = "";
@@ -50,7 +85,7 @@ class _MultipleAugmentedImagesPageState
           (Route<dynamic> route) => false,
         );
       },
-      child:Scaffold(
+      child: Scaffold(
         appBar: AppBar(
           title: const Text('Multiple augmented images'),
           actions: <Widget>[
@@ -60,9 +95,10 @@ class _MultipleAugmentedImagesPageState
               iconSize: 40,
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => MultipleAugmentedImagesPage()),
-                (Route<dynamic> route) => false,
-              );
+                  MaterialPageRoute(
+                      builder: (context) => MultipleAugmentedImagesPage()),
+                  (Route<dynamic> route) => false,
+                );
               },
             ), //IconButton
           ],
@@ -95,9 +131,8 @@ class _MultipleAugmentedImagesPageState
                   content: Row(
                     children: <Widget>[
                       Text(
-                        'Voulez vous supprimmer ce modele ?\n\n il faut actualiser la page pour afficher ce modele',
-                        style: TextStyle(fontSize: 10,
-                        color: Colors.red),
+                        'Voulez vous supprimmer ce modele ?\n\n il faut actualiser la page\n pour afficher ce modele',
+                        style: TextStyle(fontSize: 10, color: Colors.red),
                       ),
                       IconButton(
                           icon: Icon(
@@ -163,6 +198,7 @@ class _MultipleAugmentedImagesPageState
       }
     }
   }
+
   @override
   void dispose() {
     arCoreController.dispose();
