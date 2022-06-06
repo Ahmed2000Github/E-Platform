@@ -1,0 +1,40 @@
+{
+  "etudiants": [
+    {
+      "id": "1",
+      "nom": "FIROUD",
+      "prenom": "REDA",
+      "niveau": "IRISI-2",
+      "code_apogee": "1811991",
+      "avatar": "assets/images_etudiants/avatars/firoud.jpeg",
+      "photo_detect": "assets/images_etudiants/photos_detect/firoud.jpg"
+    },
+    {
+      "id": "2",
+      "nom": "KANNOUFA",
+      "prenom": "F. EZZAHRA",
+      "niveau": "IRISI-2",
+      "code_apogee": "1811992",
+      "avatar": "assets/images_etudiants/avatars/kannoufa.jpg",
+      "photo_detect": "assets/images_etudiants/photos_detect/kannoufa.jpg"
+    },
+    {
+      "id": "3",
+      "nom": "OUSSAHI",
+      "prenom": "SALMA",
+      "niveau": "IRISI-2",
+      "code_apogee": "1811993",
+      "avatar": "assets/images_etudiants/avatars/oussahi.jpg",
+      "photo_detect": "assets/images_etudiants/photos_detect/oussahi.jpg"
+    },
+    {
+      "id": "4",
+      "nom": "MAROUNI",
+      "prenom": "HICHAM",
+      "niveau": "IRISI-2",
+      "code_apogee": "1811994",
+      "avatar": "assets/images_etudiants/avatars/marouni.png",
+      "photo_detect": "assets/images_etudiants/photos_detect/marouni.jpg"
+    }
+  ]
+}

@@ -27,49 +27,49 @@ class _MultipleAugmentedImagesPageState
         id: "1",
         imageLink:
             "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/cheval.jpeg",
-        modeleName: "earth_augmented_image",
+        modeleName: "cheval",
         modelLink:
             "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/Cheval.glb"),
     DsitantImageAsset(
         id: "2",
         imageLink:
             "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/lucan.jpeg",
-        modeleName: "prova_texture",
+        modeleName: "lucan",
         modelLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/Lucane.glb"),
     DsitantImageAsset(
         id: "3",
         imageLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/animal.jpeg",
-        modeleName: "animale",
+        modeleName: "animal",
         modelLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/animal.glb"),
     DsitantImageAsset(
         id: "3",
         imageLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/papillon.jpeg",
-        modeleName: "animale",
+        modeleName: "papillon",
         modelLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/Papillon%20monarque.glb"),
     DsitantImageAsset(
         id: "3",
         imageLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/souris.jpeg",
-        modeleName: "animale",
+        modeleName: "souris",
         modelLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/Souris.glb"),
     DsitantImageAsset(
         id: "3",
         imageLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/snail.jpeg",
-        modeleName: "animale",
+        modeleName: "snail",
         modelLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/snail.glb"),
     DsitantImageAsset(
         id: "3",
         imageLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/bee.jpeg",
-        modeleName: "animale",
+        modeleName: "bee",
         modelLink:
             "https://github.com/Ahmed2000Github/Models/raw/master/Bee.glb"),
   ];
