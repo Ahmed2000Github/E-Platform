@@ -26,17 +26,52 @@ class _MultipleAugmentedImagesPageState
     DsitantImageAsset(
         id: "1",
         imageLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth.jpg",
+            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/cheval.jpeg",
         modeleName: "earth_augmented_image",
         modelLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/earth.gltf"),
+            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/Cheval.glb"),
     DsitantImageAsset(
         id: "2",
         imageLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/Sun.jpg",
+            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/lucan.jpeg",
         modeleName: "prova_texture",
         modelLink:
-            "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/sun/sun.gltf"),
+            "https://github.com/Ahmed2000Github/Models/raw/master/Lucane.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/animal.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/animal.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/papillon.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/Papillon%20monarque.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/souris.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/Souris.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/snail.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/snail.glb"),
+    DsitantImageAsset(
+        id: "3",
+        imageLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/bee.jpeg",
+        modeleName: "animale",
+        modelLink:
+            "https://github.com/Ahmed2000Github/Models/raw/master/Bee.glb"),
   ];
   // ignore: avoid_init_to_null, non_constant_identifier_names
   String NameObject = "";
