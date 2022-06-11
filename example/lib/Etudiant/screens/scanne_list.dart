@@ -98,29 +98,32 @@ class ChoiceListView extends StatelessWidget {
                     switch (scanChoice.choiceId) {
                       case 1:
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    MultipleAugmentedImagesPage()),
-                    (Route<dynamic> route) => false,);
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  MultipleAugmentedImagesPage()),
+                          (Route<dynamic> route) => false,
+                        );
                         break;
                       case 2:
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NewScanNewQr()),
-                    (Route<dynamic> route) => false,);
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NewScanNewQr()),
+                          (Route<dynamic> route) => false,
+                        );
                         break;
                       case 3:
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ColorPickerScreen()),
-                    (Route<dynamic> route) => false,);
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ColorPickerScreen()),
+                          (Route<dynamic> route) => false,
+                        );
                         break;
                       default:
                     }
-                  }, // Handle your callback
+                  },
                   child: Container(
                       margin: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
@@ -168,7 +171,6 @@ class ChoiceListView extends StatelessWidget {
                 )),
       );
       list.add(SizedBox(height: MediaQuery.of(context).size.height * 0.05));
-
     }
     return list;
   }

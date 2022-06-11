@@ -6,6 +6,7 @@ final String columnId = '_id';
 final String columncoursId = 'coursId';
 final String columnchapitreId = 'chapitreId';
 
+// classe pour l'enregistrement des donnees localement
 class EtudiantData {
   int id;
   int coursId;
@@ -34,7 +35,9 @@ class EtudiantData {
   }
 }
 
+// classe de manipulation de la table etudiantData
 class EtudiantDataProvider {
+  // configuration d'accee
   Future<Database> open() async {
     String path = await getDatabasesPath();
     return await openDatabase(join(path, 'etudiant.db'), version: 2,
@@ -48,12 +51,18 @@ create table $tableEtudiantData (
     });
   }
 
+// insertion des donnees
   Future<EtudiantData> insert(EtudiantData etudiantData) async {
     final Database db = await open();
     etudiantData.id = await db.insert(tableEtudiantData, etudiantData.toMap());
+    if (etudiantData.id != 1) {
+      etudiantData.id = 1;
+      update(etudiantData);
+    }
     return etudiantData;
   }
 
+// lister les donnees
   Future<EtudiantData> getEtudiantData(int id) async {
     final Database db = await open();
     List<Map> maps = await db.query(tableEtudiantData,
@@ -66,12 +75,14 @@ create table $tableEtudiantData (
     return null;
   }
 
+// supprimer les donnees
   Future<int> delete(int id) async {
     final Database db = await open();
     return await db
         .delete(tableEtudiantData, where: '$columnId = ?', whereArgs: [id]);
   }
 
+// mise ajoure des donnees
   Future<int> update(EtudiantData etudiantData) async {
     final Database db = await open();
     return await db.update(tableEtudiantData, etudiantData.toMap(),
