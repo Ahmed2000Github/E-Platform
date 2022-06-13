@@ -44,6 +44,7 @@ class _CameraDetectionState extends State<CameraDetection> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Liste des étudiants présents'),
+          backgroundColor: Colors.blue[900],
         ),
         body: Center(
           child: Column(
@@ -52,8 +53,7 @@ class _CameraDetectionState extends State<CameraDetection> {
                 children: [
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text("Liste des étudiants présents"),
+                      padding: EdgeInsets.all(20),
                     ),
                   ),
                 ],
@@ -78,17 +78,19 @@ class _CameraDetectionState extends State<CameraDetection> {
                                       CircleAvatar(
                                         backgroundImage: AssetImage(
                                             "${_items[index]['photo_detect']}"),
-                                        radius: 40,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundImage: AssetImage(
-                                            "${_items[index]['avatar']}"),
-                                        radius: 40,
+                                        radius: 30,
                                       ),
                                       SizedBox(
                                         width: 8,
                                       ),
-                                      
+                                      CircleAvatar(
+                                        backgroundImage: AssetImage(
+                                            "${_items[index]['avatar']}"),
+                                        radius: 30,
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
                                       Text(
                                           "${_items[index]['nom']} ${_items[index]['prenom']}",
                                           style: TextStyle(
@@ -106,14 +108,16 @@ class _CameraDetectionState extends State<CameraDetection> {
                                       IconButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ScanScreen()),
-                      );
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ScanScreen()),
+                                            );
                                           },
                                           icon: Icon(
                                             Icons.qr_code,
-                                            color: Colors.red[900],
+                                            color: Colors.blue[900],
                                           ))
                                     ],
                                   ),
@@ -121,9 +125,10 @@ class _CameraDetectionState extends State<CameraDetection> {
                               ),
                             ));
                       })),
-            
             ],
           ),
         ));
   }
+
+  
 }

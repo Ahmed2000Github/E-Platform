@@ -1,9 +1,10 @@
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/StartCamera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:developer';
-import '../../models/Filiere.dart';
+import '../../models/Salle.dart';
 import 'GetLevels.dart';
 import 'globals.dart' as globals;
 
@@ -13,37 +14,37 @@ class LunchCamera extends StatefulWidget {
 }
 
 class _LunchCameraState extends State<LunchCamera> {
-  Future<List<Filiere>> filieres;
-  final filieresListKey = GlobalKey<_LunchCameraState>();
+  Future<List<Salle>> salles;
+  final sallesListKey = GlobalKey<_LunchCameraState>();
 
   @override
   void initState() {
     super.initState();
-    filieres = getFilieresList();
+    salles = getSallesList();
   }
 
-  Future<List<Filiere>> getFilieresList() async {
-    final response =
-        await http.get(Uri.parse("http://192.168.1.7:8000/mobile/filieres"));
+  Future<List<Salle>> getSallesList() async {
+    final response = await http.get(
+        Uri.parse("http://192.168.50.201:8000/face-recognition/mobile/salles"));
 
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
-    List<Filiere> filieres = items.map<Filiere>((json) {
-      return Filiere.fromJson(json);
+    List<Salle> salles = items.map<Salle>((json) {
+      return Salle.fromJson(json);
     }).toList();
-
-    return filieres;
+    return salles;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: filieresListKey,
+      key: sallesListKey,
       appBar: AppBar(
-        title: Text('Filiere List'),
+        title: Text('Liste des salles'),
+        backgroundColor: Colors.blue[900],
       ),
       body: Center(
-        child: FutureBuilder<List<Filiere>>(
-          future: filieres,
+        child: FutureBuilder<List<Salle>>(
+          future: salles,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             // By default, show a loading spinner.
             if (!snapshot.hasData) return CircularProgressIndicator();
@@ -52,19 +53,29 @@ class _LunchCameraState extends State<LunchCamera> {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 var data = snapshot.data[index];
+                print(data.disponible);
                 return Card(
                   child: ListTile(
-                    leading: Icon(Icons.person),
+                    leading: Icon(data.disponible == false
+                        ? Icons.no_meeting_room
+                        : Icons.meeting_room),
                     title: Text(
-                      data.nom_filiere,
-                      style: TextStyle(fontSize: 20),
+                      data.disponible == false
+                          ? "Numéro Salle :" +
+                              data.nom_salle +
+                              "\n Disponibilité : Non Disponible"
+                          : "Numéro Salle :" +
+                              data.nom_salle +
+                              "\n Disponibilité : Disponible",
+                      style: TextStyle(fontSize: 15),
                     ),
                     onTap: () {
-                      globals.selectedFiliere = data.nom_filiere;
+                      globals.selectedSalle = data.nom_salle;
+                      globals.salleId = data.id;
                       Navigator.of(context).pop();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => GetLevels()),
+                        MaterialPageRoute(builder: (context) => StartCamera()),
                       );
                     },
                   ),

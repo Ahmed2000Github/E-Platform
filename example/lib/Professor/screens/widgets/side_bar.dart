@@ -1,4 +1,5 @@
 import 'package:arcore_flutter_plugin_example/Professor/screens/views/CameraDetection.dart';
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/ListePresence.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
@@ -118,10 +119,11 @@ final _animationDuration = const Duration(milliseconds: 500);
                         MenuItem(
                         icon: Icons.checklist,
                         title: "Liste de présence",
+                        
                         onTap: () {
                           Navigator.push(
                              context,
-                           MaterialPageRoute(builder: (context) =>  CameraDetection()),
+                           MaterialPageRoute(builder: (context) =>  ListePresence()),
                             );
                         },
                       ),
