@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../main.dart';
 import '../../models/onboard_data.dart';
 import '../size_configs.dart';
 import './pages.dart';
 import './home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class OnboardingPage extends StatefulWidget {
@@ -26,6 +28,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
         shape: BoxShape.circle,
       ),
     );
+  }
+  Future setSeenonboard() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    seenOnboard= await prefs.setBool('seenOnboard', true);
+    // this will set seenOnboard to true when running onboard page for first time.
+  }
+    @override
+  void initState() {
+    super.initState();
+    setSeenonboard();
   }
   @override
   Widget build(BuildContext context) {

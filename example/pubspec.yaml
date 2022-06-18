@@ -36,6 +36,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   dropdown_search: ^3.0.1
   edge_detection: ^1.0.9
+  shared_preferences: ^2.0.15
 
   # downloads_path_provider_28: ^0.1.2
 

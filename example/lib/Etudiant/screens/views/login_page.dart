@@ -1,4 +1,4 @@
-import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
+// import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -106,23 +106,23 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Don't have an account?"),
-                     TextButton(
-                   onPressed: () {
-                   Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>SignUpPage())
-                            );
-                   },
-                child: Text(
-                'SIGN UP', //title
-                textAlign: TextAlign.end, //aligment
-                  ),
-                 ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     Text("Don't have an account?"),
+                //      TextButton(
+                //    onPressed: () {
+                //    Navigator.push(context,
+                //             MaterialPageRoute(builder: (context)=>SignUpPage())
+                //             );
+                //    },
+                // child: Text(
+                // 'SIGN UP', //title
+                // textAlign: TextAlign.end, //aligment
+                //   ),
+                //  ),
+                //   ],
+                // ),
 
                 Container(
                   padding: EdgeInsets.only(top: 100),
