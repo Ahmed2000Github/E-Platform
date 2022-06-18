@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,41 +7,23 @@ import 'dart:async';
 import 'dart:io';
 import 'package:edge_detection/edge_detection.dart';
 import 'package:flutter/services.dart';
+import 'package:screenshot/screenshot.dart';
 
 class ScreenPage extends StatefulWidget {
-  const ScreenPage({ Key key }) : super(key: key);
+  const ScreenPage({Key key}) : super(key: key);
 
   @override
   _ScreenPageState createState() => _ScreenPageState();
 }
 
 class _ScreenPageState extends State<ScreenPage> {
-    String _imagePath;
+  ScreenshotController screenshotController = ScreenshotController();
+
+  String _imagePath;
 
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<void> getImage() async {
-    String imagePath;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      imagePath = (await EdgeDetection.detectEdge);
-      print("$imagePath");
-    } on PlatformException catch (e) {
-      imagePath = e.toString();
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _imagePath = imagePath;
-    });
   }
 
   @override
@@ -56,7 +40,9 @@ class _ScreenPageState extends State<ScreenPage> {
             children: [
               Center(
                 child: ElevatedButton(
-                  onPressed: getImage,
+                  onPressed: () {
+                    getImage();
+                  },
                   child: Text('Scan'),
                 ),
               ),
@@ -82,6 +68,57 @@ class _ScreenPageState extends State<ScreenPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> getImage() async {
+    String imagePath;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
+    // try {
+    //   imagePath = (await EdgeDetection.detectEdge);
+    //   print("$imagePath");
+    // } on PlatformException catch (e) {
+    //   imagePath = e.toString();
+    // }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    // if (!mounted) return;
+
+    // setState(() {
+    //   _imagePath = imagePath;
+    // });
+    screenshotController
+        .capture(delay: Duration(milliseconds: 10))
+        .then((capturedImage) async {
+      if (capturedImage == null) {
+        print("null hhhdggd");
+      } else {
+        ShowCapturedWidget(context, capturedImage);
+      }
+    }).catchError((onError) {
+      print(onError);
+    });
+  }
+
+  Future<dynamic> ShowCapturedWidget(
+      BuildContext context, Uint8List capturedImage) {
+    return showDialog(
+      useSafeArea: false,
+      context: context,
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Captured widget screenshot"),
+        ),
+        body: Center(
+            child: capturedImage != null
+                ? Image.memory(capturedImage)
+                : Container(
+                    child: Text('data'),
+                  )),
       ),
     );
   }

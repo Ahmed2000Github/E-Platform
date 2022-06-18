@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/TextScanner/color_picker.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/chapitre_list.dart';
 import 'package:arcore_flutter_plugin_example/color.dart';
 import 'package:flutter/material.dart';
 
+import '../models/distant_image_asset.dart';
+import 'package:http/http.dart' as http;
+import '../models/utils.dart';
 import 'QrCodeScanner/new_scan_new_qr.dart';
 import 'multiple_augmented_images.dart';
 
@@ -18,19 +23,27 @@ class _ScanneList extends State<ScanneList> {
     ScanChoice(
         choiceId: 1,
         title: 'Image augmenté    ',
-        description: 'desc',
+        description: 'scan d\'image pour afficher modele',
         imagePath: 'assets/images/ar_image.png'),
     ScanChoice(
         choiceId: 2,
         title: 'QR Code augmenté',
-        description: 'desc',
+        description: 'scan de QR Code pour afficher le modele',
         imagePath: 'assets/images/qrscan.png'),
     ScanChoice(
         choiceId: 3,
         title: 'Texte augmenté    ',
-        description: 'desc',
+        description: 'scanne du text pour afficher le modele ',
         imagePath: 'assets/images/textscan.png'),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchImages();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,6 +51,66 @@ class _ScanneList extends State<ScanneList> {
         home: Scaffold(
             appBar: AppBar(
               title: Text('Les scannes disponibles'),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.download),
+                  tooltip: 'dowload',
+                  iconSize: 40,
+                  onPressed: () {
+                    Utils.distantImages = [
+                      DsitantImageAsset(
+                          id: "1",
+                          imageLink:
+                              "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/cheval.jpeg",
+                          modeleName: "cheval",
+                          modelLink:
+                              "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/earth/Cheval.glb"),
+                      DsitantImageAsset(
+                          id: "2",
+                          imageLink:
+                              "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/lucan.jpeg",
+                          modeleName: "lucan",
+                          modelLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/Lucane.glb"),
+                      DsitantImageAsset(
+                          id: "3",
+                          imageLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/animal.jpeg",
+                          modeleName: "animal",
+                          modelLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/animal.glb"),
+                      DsitantImageAsset(
+                          id: "3",
+                          imageLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/papillon.jpeg",
+                          modeleName: "papillon",
+                          modelLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/Papillon%20monarque.glb"),
+                      DsitantImageAsset(
+                          id: "3",
+                          imageLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/souris.jpeg",
+                          modeleName: "souris",
+                          modelLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/Souris.glb"),
+                      DsitantImageAsset(
+                          id: "3",
+                          imageLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/snail.jpeg",
+                          modeleName: "snail",
+                          modelLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/snail.glb"),
+                      DsitantImageAsset(
+                          id: "3",
+                          imageLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/bee.jpeg",
+                          modeleName: "bee",
+                          modelLink:
+                              "https://github.com/Ahmed2000Github/Models/raw/master/Bee.glb"),
+                    ];
+                  },
+                ), //IconButton
+              ],
               leading: IconButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
@@ -49,6 +122,37 @@ class _ScanneList extends State<ScanneList> {
               ),
             ),
             body: ChoiceListView(ScanChoices: ScanChoices)));
+  }
+
+  // fonction qui retourne la listes des liens des images et les modeles depuis le serveur
+  Future<void> fetchImages() async {
+    var response = await http.get(Uri.parse(
+        Utils.RootUrl + '/cours/api/modeles/' + Utils.chapitreId.toString()));
+    List<DsitantImageAsset> liste = (json.decode(response.body) as List)
+        .map((e) => DsitantImageAsset.fromJson(e))
+        .toList();
+
+    if (liste == null) {
+      liste = [
+        DsitantImageAsset(
+            id: "3",
+            imageLink:
+                "https://github.com/Ahmed2000Github/Models/raw/master/bee.jpeg",
+            modeleName: "bee",
+            modelLink:
+                "https://github.com/Ahmed2000Github/Models/raw/master/Bee.glb"),
+      ];
+    }
+    Utils.distantImages = liste;
+    for (var item in Utils.distantImages) {
+      print("daddadd   :" + item.modeleName);
+    }
+    // setState(() {
+    //   distantImages = liste;
+    //   for (var item in liste) {
+    //     print('the incoming data : ' + item.modelLink);
+    //   }
+    // });
   }
 }
 
@@ -158,7 +262,7 @@ class ChoiceListView extends StatelessWidget {
                               Text(
                                 scanChoice.description,
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.white),
+                                    fontSize: 15, color: Colors.white),
                               ),
                             ],
                           ),

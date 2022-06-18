@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/scanne_list.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
@@ -26,16 +27,13 @@ class _ChapitresList extends State<ChapitresList> {
   @override
   void initState() {
     initdata();
+    sleep(const Duration(microseconds: 1000));
     super.initState();
   }
 
   Future<void> initdata() async {
     // initialisation de la variable qui contient les cours
     chapitres = fetchChapitres();
-    // initialisation de sqlite provider
-    this.etudiantDataProvider = EtudiantDataProvider();
-    this.etudiantDataProvider.open();
-    etudiantData = await this.etudiantDataProvider.getEtudiantData(1);
   }
 
   @override
@@ -43,6 +41,7 @@ class _ChapitresList extends State<ChapitresList> {
     return WillPopScope(
       // ignore: missing_return
       // revenire a la page precedente button d'appariel
+      // ignore: missing_return
       onWillPop: () {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => CoursList()),
@@ -143,7 +142,8 @@ class _ChapitresList extends State<ChapitresList> {
 // fonction qui retourne la liste des chapitres correspondant au cours depuis le serveur
   Future<List<Chapitres>> fetchChapitres() async {
     try {
-      var response = await http.get(Uri.parse(Utils.RootUrl + 'chapitres'));
+      var response = await http.get(Uri.parse(
+          Utils.RootUrl + '/cours/api/chapitres/' + Utils.coursId.toString()));
       List<Chapitres> liste = (json.decode(response.body) as List)
           .map((e) => Chapitres.fromJson(e))
           .toList();
@@ -156,8 +156,7 @@ class _ChapitresList extends State<ChapitresList> {
 
 // enregistre le id de chapitre et passe l'activite des scanne
   getItemAndNavigate(int item, BuildContext context) {
-    this.etudiantDataProvider.update(new EtudiantData(
-        id: 1, coursId: etudiantData.coursId, chapitreId: item));
+    Utils.chapitreId = item.toString();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => ScanneList()),
       (Route<dynamic> route) => false,
