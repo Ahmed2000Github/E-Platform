@@ -16,6 +16,7 @@ dependencies:
   permission_handler: ^9.2.0
   path_provider: ^2.0.9
   http: ^0.13.4
+  provider: ^6.0.3
   firebase_ml_vision: ^0.9.7
   image_picker:
   clipboard: ^0.1.2+8
@@ -43,6 +44,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
 
   arcore_flutter_plugin:
     path: ../

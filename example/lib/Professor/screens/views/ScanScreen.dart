@@ -8,7 +8,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'globals.dart' as globals;
 
-
+List _etudiant = globals.data;
 List _etablissements = [
   {
     "id": "1",
@@ -79,11 +79,21 @@ class _ScanScreenState extends State<ScanScreen> {
                           ),
                         ),
                         title: Text(qrstr),
-                        subtitle: Text(""),
+                        subtitle: Column(
+                          children: <Widget>[
+                                const SizedBox(
+                                width: 50,
+                                height: 30,
+                              ),
+                              FlatButton(child: Text('Valider la presence',style: TextStyle(color: Colors.white),), onPressed: () {},color: Colors.blue)
+                            ],),
                         isThreeLine: true,
-                        trailing: Icon(Icons.check),
+                        // trailing: Icon(Icons.check),
                         contentPadding: const EdgeInsets.all(4),
-                      )),
+                      ),
+                      
+                      ),
+                      
               ]),
         ));
   }
@@ -99,19 +109,11 @@ class _ScanScreenState extends State<ScanScreen> {
           globals.scannedStudent = nom;
           qrstr =
               "nom : " + nom + "\n prenom : " + prenom + " \n salle : " + salle;
-          
-          Navigator.of(context).pop();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    ListePresence()),
-          );
         });
+       
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Présence validé pour : "+globals.scannedStudent ),
+          content: Text("Présence validé pour : " + globals.scannedStudent),
         ));
-        
       });
     } catch (e) {
       setState(() {

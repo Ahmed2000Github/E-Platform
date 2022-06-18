@@ -1,19 +1,20 @@
 class Etudiant {
-  String username;
-  String path;
-  bool is_present;
+  int id;
+  String cne;
+  String adresse;
+  String path_photos;
+  String telephone;
+  String code_apogee;
 
-  Etudiant({is_present, path, username});
+
+  Etudiant({id, cne, adresse, path_photos, telephone, code_apogee});
 
   factory Etudiant.fromJson(Map<String, dynamic> json) => Etudiant(
-        username: json['username'],
-        path: json['path'],
-        is_present: json['is_present'],
+        id: json['id'],
+        cne: json['cne'],
+        adresse: json['adresse'],
+        path_photos: json['path_photos'],
+        telephone: json['telephone'],
+        code_apogee: json['code_apogee'],
       );
-
-  Map<String, dynamic> toJson() => {
-        'username': username,
-        'path': path,
-        'is_present': is_present,
-      };
 }
