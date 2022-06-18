@@ -25,7 +25,7 @@ class _LunchCameraState extends State<LunchCamera> {
 
   Future<List<Salle>> getSallesList() async {
     final response = await http.get(
-        Uri.parse("http://192.168.50.201:8000/face-recognition/mobile/salles"));
+        Uri.parse("http://192.168.26.82:8000/face-recognition/mobile/salles"));
 
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
     List<Salle> salles = items.map<Salle>((json) {
@@ -33,6 +33,8 @@ class _LunchCameraState extends State<LunchCamera> {
     }).toList();
     return salles;
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
