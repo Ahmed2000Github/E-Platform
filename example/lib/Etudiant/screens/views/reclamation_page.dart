@@ -1,6 +1,9 @@
 
+import 'dart:convert';
+
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,7 +18,19 @@ class ReclamationPage extends StatefulWidget {
   _ReclamationPageState createState() => _ReclamationPageState();
 }
 
+
+
 class _ReclamationPageState extends  State<ReclamationPage> {
+
+    List _items = [];
+
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/absence.json');
+    final data = await json.decode(response);
+    setState(() {
+      _items = data["items"];
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return 
@@ -48,7 +63,7 @@ class _ReclamationPageState extends  State<ReclamationPage> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Text("Module : Conduite de projet",
+                    Text( _items[1]["name"].toString(),
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
                     SizedBox(height: 20,),
                     Text(" Email prof : jimouhsami@gmail.com",

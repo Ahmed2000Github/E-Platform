@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 60,
                         onPressed: () {
                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>ReclamationPage())
+                            MaterialPageRoute(builder: (context)=>WelcomePage())
                             );
                           // Auth Mobile est commenté car le backend n'est pas encore prêt
                           // await doAuthStudent(context);
