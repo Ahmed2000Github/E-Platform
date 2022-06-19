@@ -38,6 +38,9 @@ dependencies:
   edge_detection: ^1.0.9
   shared_preferences: ^2.0.15
   screenshot:
+  image_gallery_saver: ^1.7.1
+  hexcolor: ^2.0.7
+  gallery_saver: ^2.3.2
 
   # downloads_path_provider_28: ^0.1.2
 
@@ -78,7 +81,7 @@ flutter:
     - assets/prof/
     - assets/emploi.json
     - assets/absence.json
-    - assets/sample.json
+    - assets/data/
     - assets/presence.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

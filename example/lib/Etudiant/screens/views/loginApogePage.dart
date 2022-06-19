@@ -1,16 +1,14 @@
-// import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
-import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/loginApogePage.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+class LoginApogePage extends StatefulWidget {
+  const LoginApogePage({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginApogePage> createState() => _LoginApogePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginApogePageState extends State<LoginApogePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "Login",
+                      "Login  ",
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
@@ -52,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     Text(
-                      "Login to your account",
+                      "Login code Apogee",
                       style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                     )
                   ],
@@ -61,8 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: <Widget>[
-                      inputFile(label: "Email"),
-                      inputFile(label: "Password", obscureText: true)
+                      inputFile(label: "Code Apogee"),
                     ],
                   ),
                 ),
@@ -102,24 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("login with apogee code"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginApogePage()));
-                      },
-                      child: Text(
-                        'APOGEE LOGIN', //title
-                        textAlign: TextAlign.end, //aligment
-                      ),
-                    ),
-                  ],
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 100),
