@@ -15,19 +15,20 @@ class _ListePresenceState extends State<ListePresence> {
 
   @override
   void initState() {
-    print("Global data :" + globals.data + " fin global data");
-
+    print("Global data  reda :" + globals.data.toString() + " fin global data");
+    globals.visiblepres = true;
     readJson();
     super.initState();
   }
 
   // Fetch content from the json file
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/presence.json');
-    final data = await json.decode(response);
+    // final String response = await rootBundle.loadString('assets/presence.json');
+    // final data = await json.decode(response);
 
     setState(() {
-      _items = data["items"];
+      _items = globals.data;
+      print("hredi");
       print(_items);
     });
   }
@@ -54,15 +55,18 @@ class _ListePresenceState extends State<ListePresence> {
                               // leading: Text(_items[index]["path"] +"\n"+ _items[index]["path"]),
                               leading: Column(children: <Widget>[
                                 CircleAvatar(
-                                  child: Icon(Icons.person),
-                                  radius: 10,
+                                  radius: 10.0,
+                                  backgroundImage: NetworkImage(
+                                      "http://192.168.129.201:8000/emploie/api/get-photo/media/photo.jpg"),
+                                  backgroundColor: Colors.transparent,
                                 ),
                                 CircleAvatar(
                                   child: Icon(Icons.person),
                                   radius: 10,
                                 ),
                               ]),
-                              title: Text(_items[index]["username"]),
+                              title: Text(_items[index]["etudiant"]["user"]
+                                  ["username"]),
                               subtitle: Text(
                                   (_items[index]["is_present"]).toString() ==
                                           'false'
@@ -70,6 +74,12 @@ class _ListePresenceState extends State<ListePresence> {
                                       : "Present(e)"),
                               trailing: IconButton(
                                   onPressed: () {
+                                    globals.idtobecorrected =
+                                        _items[index]["etudiant"]["id"];
+                                    globals.seancetobecorrected =
+                                        _items[index]["seance"];
+                                    globals.nametobecorrected = _items[index]
+                                        ["etudiant"]["user"]["username"];
                                     Navigator.of(context).pop();
                                     Navigator.push(
                                       context,

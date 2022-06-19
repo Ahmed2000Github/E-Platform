@@ -38,6 +38,7 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
+  var fullname;
   var qrstr = '';
   var selectedEtablissment = "FSSM";
   var height, width;
@@ -73,27 +74,34 @@ class _ScanScreenState extends State<ScanScreen> {
                     ? Text("Aucun étudiant n'est scanné")
                     : Card(
                         child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            "assets/prof/user.png",
+                          leading: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              "assets/prof/user.png",
+                            ),
                           ),
-                        ),
-                        title: Text(qrstr),
-                        subtitle: Column(
-                          children: <Widget>[
-                                const SizedBox(
+                          title: Text(qrstr),
+                          subtitle: Column(
+                            children: <Widget>[
+                              const SizedBox(
                                 width: 50,
                                 height: 30,
                               ),
-                              FlatButton(child: Text('Valider la presence',style: TextStyle(color: Colors.white),), onPressed: () {},color: Colors.blue)
-                            ],),
-                        isThreeLine: true,
-                        // trailing: Icon(Icons.check),
-                        contentPadding: const EdgeInsets.all(4),
+                              FlatButton(
+                                  child: Text(
+                                    'Valider la presence',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () {
+                                    changerPresence();
+                                  },
+                                  color: Colors.blue)
+                            ],
+                          ),
+                          isThreeLine: true,
+                          // trailing: Icon(Icons.check),
+                          contentPadding: const EdgeInsets.all(4),
+                        ),
                       ),
-                      
-                      ),
-                      
               ]),
         ));
   }
@@ -105,20 +113,47 @@ class _ScanScreenState extends State<ScanScreen> {
         setState(() {
           var nom = value.split(';')[2];
           var prenom = value.split(';')[1];
+          this.fullname = nom + " " + prenom;
           var salle = value.split(';')[3];
           globals.scannedStudent = nom;
           qrstr =
               "nom : " + nom + "\n prenom : " + prenom + " \n salle : " + salle;
         });
+
        
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Présence validé pour : " + globals.scannedStudent),
-        ));
       });
     } catch (e) {
       setState(() {
         qrstr = 'unable to read this';
       });
     }
+  }
+bool equalsIgnoreCase(String string1, String string2) {
+  return string1.toLowerCase() == string2.toLowerCase();
+}
+  changerPresence() async {
+    if (equalsIgnoreCase(this.fullname.trim(),globals.nametobecorrected.trim())){
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Présence validé pour : " + globals.nametobecorrected),
+        ));
+      final url = 'http://192.168.129.201:8000/emploie/api/modifier-presence/' +
+          globals.seancetobecorrected.toString() +
+          "/" +
+          globals.idtobecorrected.toString();
+    final response = await http.get(Uri.parse(url));
+    print("hi reda" + response.body);
+
+    print("heloooo");
+    globals.data = json.decode(response.body) as List;
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Qr invalid"),
+        ));
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ListePresence()),
+    );
   }
 }

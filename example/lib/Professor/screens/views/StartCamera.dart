@@ -10,6 +10,8 @@ import '../../models/Filiere.dart';
 import 'globals.dart' as globals;
 import 'CameraDetection.dart';
 import 'package:path_provider/path_provider.dart';
+import 'ListePresence.dart';
+import 'globals.dart' as globals;
 
 class StartCamera extends StatefulWidget {
   @override
@@ -21,12 +23,12 @@ class _StartCameraState extends State<StartCamera> {
   void initState() {
     super.initState();
     startLive();
-    // Future.delayed(Duration(seconds: 5), () {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => CameraDetection()),
-    //   );
-    // });
+    Future.delayed(Duration(seconds: 15), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ListePresence()),
+      );
+    });
   }
 
   @override
@@ -37,30 +39,31 @@ class _StartCameraState extends State<StartCamera> {
         backgroundColor: Colors.blue[900],
       ),
       body: Center(
-        child: Text("the camera has started successfuly"),
+        //ZIDI SOINNER
+        child: Text("please wait until the camera finishes"),
       ),
     );
   }
 
   Future<void> startLive() async {
     final url =
-        Uri.parse('http://192.168.26.82:8000/face-recognition/mobile/salle');
+        Uri.parse('http://192.168.129.201:8000/face-recognition/mobile/salle');
     final headers = {"Content-type": "application/json"};
-    final json = '{"title": "Hello", "body":"' +
+    final jsonm = '{"title": "Hello", "body":"' +
         globals.salleId.toString() +
         ''
             '", "userId": 1}';
-    final response = await post(url, headers: headers, body: json);
+    final response = await post(url, headers: headers, body: jsonm);
     print('Status code: ${response.statusCode}');
-    print('Body: ${response.body}');
-    _write(response.body);
-    // var data = response.body as List;
+    print('Status code: ${response.body}');
+    globals.data = json.decode(response.body) as List;
     // print(data);
   }
 
   _write(String text) async {
     final Directory directory = await getApplicationDocumentsDirectory();
-    final File file = File('${directory.path}/my_file.txt');
+    final File file = File('${directory.path}/fichierpres.json');
+
     print(file.path);
     // await file.writeAsString(text);
   }
