@@ -38,6 +38,7 @@ dependencies:
   edge_detection: ^1.0.9
   shared_preferences: ^2.0.15
   screenshot:
+  mailer: ^5.1.1
 
   # downloads_path_provider_28: ^0.1.2
 

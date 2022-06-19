@@ -1,5 +1,7 @@
 // import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/reclamation_page.dart';
+
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: 60,
                         onPressed: () {
                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>WelcomePage())
+                            MaterialPageRoute(builder: (context)=>ReclamationPage())
                             );
                         },
                         color: Color(0xff0095FF),
