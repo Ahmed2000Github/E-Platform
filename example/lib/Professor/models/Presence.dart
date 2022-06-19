@@ -1,4 +1,6 @@
-import 'package:arcore_flutter_plugin_example/Professor/models/Etudiant.dart';
+// import 'package:arcore_flutter_plugin_example/Professor/models/Etudiant.dart';
+
+import 'etudiant.dart';
 
 class Presence {
   int id;
