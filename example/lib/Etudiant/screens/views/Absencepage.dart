@@ -23,27 +23,6 @@ class _MyHomePageState extends State<AbsencePage> {
       _items = data["items"];
     });
   }
-  List<String> productName = [
-    'Conduite de projet',
-    'Conduite de projet',
-    'Conduite de projet',
-    'Conduite de projet',
-    'Conduite de projet',
-    'Conduite de projet',
-    'Conduite de projet',
-    'Conduite de projet',
-  ];
-  List<String> productUnit = [
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-    '20/06/2022',
-  ];
 
 @override
 void initState() {
