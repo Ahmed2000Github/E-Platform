@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'ar_screen.dart';
-
+// [UnivIt : Errouk Ismail]
 class NewScanNewQr extends StatefulWidget {
   const NewScanNewQr({Key key}) : super(key: key);
 
@@ -56,15 +56,15 @@ class _AppStateQr extends State<NewScanNewQr> {
       child: Scaffold(
           appBar: AppBar(
             title: const Text('Qr Code Scanner'),
-             leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => ScanneList()),
-                (Route<dynamic> route) => false,
-              );
-            },
-            icon: Icon(Icons.arrow_back),
-          ),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => ScanneList()),
+                  (Route<dynamic> route) => false,
+                );
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
           ),
           body: Column(
             children: [
@@ -72,9 +72,7 @@ class _AppStateQr extends State<NewScanNewQr> {
                 Text("Vous devez scanner un qr de vos cours"),
               Center(
                   child: Column(
-
                 children: [
-
                   Image(
                       image: NetworkImage(
                           "https://media.istockphoto.com/vectors/qr-code-scan-phone-icon-in-comic-style-scanner-in-smartphone-vector-vector-id1166145556")),
@@ -97,6 +95,7 @@ class _AppStateQr extends State<NewScanNewQr> {
     );
   }
 
+// [UnivIt : Errouk Ismail]
   Future<void> _scanQr(BuildContext context) async {
     String modelUrl;
     try {
@@ -111,8 +110,7 @@ class _AppStateQr extends State<NewScanNewQr> {
           ),
         ),
       );
-      if (result.rawContent
-          .contains('https://raw.githubusercontent.com/ismail-ERK/models-ar')) {
+      if (result.rawContent.contains('/media/img/cours/modeles_3d')) {
         setState(() => scanResultat = result.rawContent);
         modelUrl = result.rawContent;
         Navigator.push(
@@ -137,6 +135,7 @@ class _AppStateQr extends State<NewScanNewQr> {
   }
 }
 
+// [UnivIt : Errouk Ismail]
 Widget flatButton(BuildContext context, String text, Widget widget) {
   return FlatButton(
     padding: EdgeInsets.all(15.0),

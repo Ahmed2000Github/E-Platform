@@ -1,4 +1,5 @@
 import 'package:arcore_flutter_plugin_example/Professor/screens/views/CameraDetection.dart';
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/ListePresence.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
@@ -6,40 +7,43 @@ import 'package:arcore_flutter_plugin_example/Etudiant/screens/widgets/menu_item
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/scheduler_page.dart';
 
 import '../views/ScanScreen.dart';
+import '../views/PresenceList.dart';
 import '../views/LunchCamera.dart';
 
-
 class SideBar extends StatefulWidget {
-  const SideBar({ Key key }) : super(key: key);
-  
+  const SideBar({Key key}) : super(key: key);
+
   _SideBarState createState() => _SideBarState();
 }
 
-class _SideBarState extends State<SideBar> with SingleTickerProviderStateMixin <SideBar>  {
- AnimationController _animationController;
- StreamController<bool> isSidebarOpenedStreamController;
- Stream<bool> isSidebarOpenedStream;
- StreamSink<bool> isSidebarOpenedSink;
+class _SideBarState extends State<SideBar>
+    with SingleTickerProviderStateMixin<SideBar> {
+  AnimationController _animationController;
+  StreamController<bool> isSidebarOpenedStreamController;
+  Stream<bool> isSidebarOpenedStream;
+  StreamSink<bool> isSidebarOpenedSink;
 // final bool isSidebarOpened = true;
-final _animationDuration = const Duration(milliseconds: 500);
+  final _animationDuration = const Duration(milliseconds: 500);
 
- @override
+  @override
   void initState() {
-      _animationController = AnimationController(vsync: this, duration: _animationDuration); 
-      isSidebarOpenedStreamController = PublishSubject<bool>();
-      isSidebarOpenedStream = isSidebarOpenedStreamController.stream;
-      isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
+    _animationController =
+        AnimationController(vsync: this, duration: _animationDuration);
+    isSidebarOpenedStreamController = PublishSubject<bool>();
+    isSidebarOpenedStream = isSidebarOpenedStreamController.stream;
+    isSidebarOpenedSink = isSidebarOpenedStreamController.sink;
     super.initState();
   }
 
-   @override
+  @override
   void dispose() {
     _animationController.dispose();
-     isSidebarOpenedStreamController.close();
-     isSidebarOpenedSink.close();
+    isSidebarOpenedStreamController.close();
+    isSidebarOpenedSink.close();
     super.dispose();
   }
-   void onIconPressed() {
+
+  void onIconPressed() {
     final animationStatus = _animationController.status;
     final isAnimationCompleted = animationStatus == AnimationStatus.completed;
 
@@ -53,119 +57,121 @@ final _animationDuration = const Duration(milliseconds: 500);
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return StreamBuilder<bool>(
       initialData: false,
       stream: isSidebarOpenedStream,
       builder: (context, isSideBarOpenedAsync) {
-      return AnimatedPositioned (
-      duration: _animationDuration,
-      top:0,
-      bottom:0,
-      left:isSideBarOpenedAsync.data ? 0 : -screenWidth, 
-      right:isSideBarOpenedAsync.data ? 0 : screenWidth-45 ,
-       child: Row(
-        children: <Widget>[
-            Expanded(
-                child:Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                   color: Colors.blueAccent[700],
-                child:Column(
-                  children: <Widget>[
+        return AnimatedPositioned(
+          duration: _animationDuration,
+          top: 0,
+          bottom: 0,
+          left: isSideBarOpenedAsync.data ? 0 : -screenWidth,
+          right: isSideBarOpenedAsync.data ? 0 : screenWidth - 45,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  color: Colors.blueAccent[700],
+                  child: Column(
+                    children: <Widget>[
                       SizedBox(
                         height: 100,
                       ),
                       ListTile(
                         title: Text(
                           "Espace Professeur",
-                          style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w800),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800),
                         ),
-                         subtitle: Text(
+                        subtitle: Text(
                           "Gestion de présence",
                           style: TextStyle(
                             color: Color(0xFF1BB5FD),
                             fontSize: 18,
                           ),
                         ),
-                        
                       ),
-                    Divider(
+                      Divider(
                         height: 6,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
                         endIndent: 32,
                       ),
-                       MenuItem(
+                      MenuItem(
                         icon: Icons.qr_code,
-                        
                         title: "Scan QR Code",
                         onTap: () {
                           Navigator.push(
-                             context,
-                           MaterialPageRoute(builder: (context) =>  ScanScreen()),
-                            );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScanScreen()),
+                          );
                         },
                       ),
-                        Divider(
+                      Divider(
                         height: 6,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
                         endIndent: 32,
                       ),
-                        MenuItem(
+                      MenuItem(
                         icon: Icons.checklist,
                         title: "Liste de présence",
                         onTap: () {
                           Navigator.push(
-                             context,
-                           MaterialPageRoute(builder: (context) =>  CameraDetection()),
-                            );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ListePresence()),
+                          );
                         },
                       ),
-                        Divider(
+                      Divider(
                         height: 6,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
                         endIndent: 32,
                       ),
-                    MenuItem(
+                      MenuItem(
                         icon: Icons.camera,
                         title: "Lancer la caméra",
                         onTap: () {
                           Navigator.push(
-                             context,
-                           MaterialPageRoute(builder: (context) =>  LunchCamera()),
-                            );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LunchCamera()),
+                          );
                         },
                       ),
-                        Divider(
+                      Divider(
                         height: 6,
                         thickness: 0.5,
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
                         endIndent: 32,
                       ),
-                    
-                       MenuItem(
+                      MenuItem(
                         icon: Icons.exit_to_app,
                         title: "Logout",
                       ),
-                  ],
+                    ],
+                  ),
                 ),
-                ),
-            ),
-            Align(
-             alignment: Alignment(0,-0.9),
-             child: GestureDetector(
-                onTap: () {
+              ),
+              Align(
+                alignment: Alignment(0, -0.9),
+                child: GestureDetector(
+                  onTap: () {
                     onIconPressed();
                   },
-            
-               child: ClipPath(
+                  child: ClipPath(
                     clipper: CustomMenuClipper(),
                     child: Container(
                       width: 35,
@@ -182,13 +188,14 @@ final _animationDuration = const Duration(milliseconds: 500);
                   ),
                 ),
               ),
-        ],  
-       ), 
-       );
-       },
+            ],
+          ),
+        );
+      },
     );
   }
 }
+
 class CustomMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

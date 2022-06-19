@@ -1,0 +1,30 @@
+{
+  "items":[
+    {
+      "username": "Salma",
+      "path": "salma.png",
+      "is_present": false
+    },
+    {
+        "username": "reda",
+        "path": "reda.png",
+        "is_present": true
+      },
+      {
+        "username": "fatimaezzahra",
+        "path": "tamega.png",
+        "is_present": true
+      },
+      {
+        "username": "abdelhadi",
+        "path": "kaoutar.png",
+        "is_present": false
+      },
+      {
+        "username": "ra9ra9",
+        "path": "said.png",
+        "is_present": false
+      }
+    
+  ]
+  }

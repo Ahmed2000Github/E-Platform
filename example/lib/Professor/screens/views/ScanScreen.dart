@@ -1,3 +1,4 @@
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/ListePresence.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -5,7 +6,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'globals.dart' as globals;
 
+List _etudiant = globals.data;
 List _etablissements = [
   {
     "id": "1",
@@ -60,29 +63,37 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
                 Text(
                   'Cliquer ici pour scanner un étudiant',
-                  style: TextStyle(color: Colors.blue, fontSize: 20),
+                  style: TextStyle(color: Colors.blue[900], fontSize: 20),
                 ),
                 ElevatedButton(onPressed: scanQr, child: Text(('Scanner'))),
 
                 //Condition
 
-                qrstr == '' ? 
-                Text("Aucun étudiant n'est scanné")
-                :
-                Card(
-                    child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage(
-                      "assets/prof/user.png",
-                    ),
-                  ),
-                  title: Text(qrstr),
-                  subtitle: Text(""),
-                  isThreeLine: true,
-                  trailing: Icon(Icons.check),
-                  contentPadding: const EdgeInsets.all(4),
-                )),
-                
+                qrstr == ''
+                    ? Text("Aucun étudiant n'est scanné")
+                    : Card(
+                        child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: AssetImage(
+                            "assets/prof/user.png",
+                          ),
+                        ),
+                        title: Text(qrstr),
+                        subtitle: Column(
+                          children: <Widget>[
+                                const SizedBox(
+                                width: 50,
+                                height: 30,
+                              ),
+                              FlatButton(child: Text('Valider la presence',style: TextStyle(color: Colors.white),), onPressed: () {},color: Colors.blue)
+                            ],),
+                        isThreeLine: true,
+                        // trailing: Icon(Icons.check),
+                        contentPadding: const EdgeInsets.all(4),
+                      ),
+                      
+                      ),
+                      
               ]),
         ));
   }
@@ -95,10 +106,14 @@ class _ScanScreenState extends State<ScanScreen> {
           var nom = value.split(';')[2];
           var prenom = value.split(';')[1];
           var salle = value.split(';')[3];
-          qrstr = 
-           "nom : " + nom + "\n prenom : " + prenom + " \n salle : " + salle;
-          print(value);
+          globals.scannedStudent = nom;
+          qrstr =
+              "nom : " + nom + "\n prenom : " + prenom + " \n salle : " + salle;
         });
+       
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Présence validé pour : " + globals.scannedStudent),
+        ));
       });
     } catch (e) {
       setState(() {

@@ -27,13 +27,6 @@ class _CoursList extends State<CoursList> {
   Future<void> initdata() async {
     // initialisation de la variable qui contient les cours
     cours = fetchCours();
-    // initialisation de sqlite provider
-    this.etudiantDataProvider = EtudiantDataProvider();
-    this.etudiantDataProvider.open();
-    EtudiantData data = await this
-        .etudiantDataProvider
-        .insert(new EtudiantData(id: null, coursId: 0, chapitreId: 0));
-    print("datattat  " + data.id.toString());
   }
 
   @override
@@ -123,12 +116,13 @@ class _CoursList extends State<CoursList> {
 // fonction qui retourne la listes des cours depuis le serveur
   Future<List<Cours>> fetchCours() async {
     try {
-      var response =
-          await http.get(Uri.parse(Utils.RootUrl + 'chapitres'), headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + Utils.token,
-      });
+      var response = await http.get(
+          Uri.parse(Utils.RootUrl + '/modules/liste_ElementModule'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + Utils.token,
+          });
       List<Cours> liste = (json.decode(response.body) as List)
           .map((e) => Cours.fromJson(e))
           .toList();
@@ -141,9 +135,7 @@ class _CoursList extends State<CoursList> {
 
 // enregistre le id de cours et passe l'activite des chapitres
   getItemAndNavigate(int item, BuildContext context) {
-    this
-        .etudiantDataProvider
-        .update(new EtudiantData(id: 1, coursId: item, chapitreId: 0));
+    Utils.coursId = item.toString();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => ChapitresList()),
       (Route<dynamic> route) => false,

@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../size_configs.dart';
-import '../views/sign_up_page.dart';
-import '../../../Professor/screens/views/sign_up_page.dart';
+import '../views/login_page.dart';
+import '../../../Professor/screens/views/login_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -82,7 +82,7 @@ class BottomNavBar extends StatelessWidget {
                          svgSrc: "assets/images/prof.svg",
                           press: () {
                             Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>SignUpPageProf())
+                            MaterialPageRoute(builder: (context)=>LoginPageProf())
                             );
                           },
                         ), // categorycard
@@ -91,7 +91,7 @@ class BottomNavBar extends StatelessWidget {
                          svgSrc: "assets/images/student.svg",
                           press: () {
                              Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>SignUpPage())
+                            MaterialPageRoute(builder: (context)=>LoginPage())
                             );
                           },
                         ), // categorycard

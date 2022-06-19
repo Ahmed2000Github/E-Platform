@@ -216,6 +216,7 @@ import 'package:flutter/material.dart';
 
 import 'new_scan_new_qr.dart';
 
+// [UnivIt : Errouk Ismail]
 class ArModelScreen extends StatefulWidget {
   final String modelUrl;
 
@@ -291,6 +292,7 @@ class _ArModelScreenState extends State<ArModelScreen> {
     );
   }
 
+// [UnivIt : Errouk Ismail]
   void _onArCoreViewCreated(ArCoreController controller) {
     arCoreController = controller;
     arCoreController.onNodeTap = (name) => onTapHandler(name);
@@ -325,6 +327,7 @@ class _ArModelScreenState extends State<ArModelScreen> {
     arCoreController.addArCoreNodeWithAnchor(toucanNode);
   }
 
+// [UnivIt : Errouk Ismail]
   void _handleOnPlaneTap(List<ArCoreHitTestResult> hits) {
     final hit = hits.first;
     _addToucano(hit);
