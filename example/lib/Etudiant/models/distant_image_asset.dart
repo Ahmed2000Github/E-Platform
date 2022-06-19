@@ -16,11 +16,10 @@ class DsitantImageAsset {
 // mapage des donnees
   factory DsitantImageAsset.fromJson(Map<String, dynamic> json) {
     return DsitantImageAsset(
-      id: json['id'],
-      modeleName: json['titre_traitement'],
-      modelLink:
-          Utils.RootUrl.split('/cours/api').first + json['path_modele3d'],
-      imageLink: Utils.RootUrl.split('/cours/api').first + json['path_image'],
+      id: json['id'].toString(),
+      modeleName: json['nom'],
+      modelLink: Utils.RootUrl + json['path_modele3d'],
+      imageLink: Utils.RootUrl + json['path_image'],
     );
   }
 }

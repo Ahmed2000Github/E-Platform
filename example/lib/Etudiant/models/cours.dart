@@ -8,7 +8,7 @@ class Cours {
   factory Cours.fromJson(Map<String, dynamic> json) {
     return Cours(
       id: json['id'],
-      libelle_module: json['libelle'],
+      libelle_module: json['libelle_element_module'],
     );
   }
 }

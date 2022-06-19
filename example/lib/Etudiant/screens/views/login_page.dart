@@ -1,6 +1,16 @@
 // import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
+import 'dart:convert';
+
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/reclamation_page.dart';
+
 import 'package:flutter/material.dart';
+
+import '../../../Database/models/User.dart';
+import '../../../Database/models/UserDto.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../Database/openDB/myDb.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key key }) : super(key: key);
@@ -8,7 +18,8 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
+var studentEmailController = TextEditingController();
+var studentPasswordController = TextEditingController();
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
@@ -55,8 +66,70 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: <Widget>[
-                      inputFile(label: "Email"),
-                      inputFile(label: "Password", obscureText: true)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Email",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black87),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextField(
+                            controller: studentEmailController,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 10),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.grey.shade400),
+                                ),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.shade400))),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Password",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black87),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextField(
+                            controller: studentPasswordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 10),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.grey.shade400),
+                                ),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.grey.shade400))),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -85,6 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                            Navigator.push(context,
                             MaterialPageRoute(builder: (context)=>WelcomePage())
                             );
+                          // Auth Mobile est commenté car le backend n'est pas encore prêt
+                          // await doAuthStudent(context);
                         },
                         color: Color(0xff0095FF),
                         elevation: 0,
@@ -145,7 +220,74 @@ class _LoginPageState extends State<LoginPage> {
   }
 
 }
+// [UnivIt : Errouk Ismail]
+Future<User> fetchData(UserDto userDto) async {
+  final response = await http.post(
+    Uri.parse('http://abed-196-127-177-30.ngrok.io/users/signin'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'email': userDto.email,
+      'password': userDto.password
+    }),
+  );
 
+  if (response.statusCode == 201) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return User.fromMap(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    return null;
+  }
+}
+
+// [UnivIt : Errouk Ismail]
+void doAuthStudent(BuildContext context) async {
+  // ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: Text("email : "+profEmailController.text+ "  password : "+profPasswordController.text)));
+  User user = null;
+  dynamic connexion = "";
+  UserDto userDto = new UserDto(
+      email: studentEmailController.text, password: studentPasswordController.text);
+  await fetchData(userDto).then((value) => user = value);
+  if(user==null){
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar
+      (content: Text("Email or Password is incorrect!!!")));
+
+  }
+  dynamic txt = "";
+  dynamic permission = 0;
+  dynamic auth = 0;
+  if (user != null) {
+    await DatabaseHelper.instance.removeall().then((value) => permission = 1);
+    if (permission == 1) {
+      await DatabaseHelper.instance
+          .add(user)
+          .then((value) => txt = "added")
+          .catchError((err) => txt = "error");
+      dynamic myTxt = 0;
+      await DatabaseHelper.instance
+          .getUsers()
+          .then((value) => myTxt = value.first.username);
+      auth = 1;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(new SnackBar(content: Text(myTxt)));
+    }
+
+    if (auth == 1) {
+      if(user.type_user=="3"){
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+      }
+      else{
+        ScaffoldMessenger.of(context)
+            .showSnackBar(new SnackBar(content: Text(user.username +" is not a Student!!!!")));
+      }
+    }
+  }
+}
 
 // we will be creating a widget for text field
 Widget inputFile({label, obscureText = false})

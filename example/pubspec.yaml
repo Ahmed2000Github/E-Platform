@@ -37,13 +37,14 @@ dependencies:
   dropdown_search: ^3.0.1
   edge_detection: ^1.0.9
   shared_preferences: ^2.0.15
+  screenshot:
+  mailer: ^5.1.1
 
   # downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
 
   arcore_flutter_plugin:
     path: ../
@@ -76,6 +77,8 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/prof/
+    - assets/emploi.json
+    - assets/absence.json
     - assets/sample.json
     - assets/presence.json
 
