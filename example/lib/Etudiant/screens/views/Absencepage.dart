@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/scheduler_page.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/reclamation_page.dart';
 import 'package:flutter/services.dart';
 
 class AbsencePage extends StatefulWidget {
@@ -107,7 +107,7 @@ void initState() {
                                         onTap: (){
                                           Navigator.push(
                              context,
-                           MaterialPageRoute(builder: (context) => const SchedulerPage()),
+                           MaterialPageRoute(builder: (context) => const ReclamationPage()),
                             );
                                         },
                                         child: Container(

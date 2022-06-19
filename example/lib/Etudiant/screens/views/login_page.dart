@@ -1,6 +1,8 @@
 // import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/loginApogePage.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/reclamation_page.dart';
+
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

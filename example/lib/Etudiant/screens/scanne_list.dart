@@ -56,6 +56,7 @@ class _ScanneList extends State<ScanneList> {
                   icon: Icon(Icons.download),
                   tooltip: 'dowload',
                   iconSize: 40,
+                  // si on a des erreurs de notre serveur
                   onPressed: () {
                     Utils.distantImages = [
                       DsitantImageAsset(
