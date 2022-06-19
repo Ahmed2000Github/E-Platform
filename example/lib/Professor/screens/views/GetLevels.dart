@@ -24,7 +24,7 @@ class _GetLevelsState extends State<GetLevels> {
 
   Future<List<Niveau>> getNiveausList() async {
     final response = await http.get(Uri.parse(
-        "http://192.168.1.7:8000/mobile/niveau/" + globals.selectedSalle));
+        "http://192.168.129.201:8000/mobile/niveau/" + globals.selectedSalle));
 
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
     List<Niveau> niveaus = items.map<Niveau>((json) {
