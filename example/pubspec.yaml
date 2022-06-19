@@ -79,7 +79,6 @@ flutter:
     - assets/prof/
     - assets/emploi.json
     - assets/absence.json
-    - assets/sample.json
     - assets/presence.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
