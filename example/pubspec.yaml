@@ -45,7 +45,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
 
   arcore_flutter_plugin:
     path: ../
@@ -78,6 +77,8 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/prof/
+    - assets/emploi.json
+    - assets/absence.json
     - assets/sample.json
     - assets/presence.json
 

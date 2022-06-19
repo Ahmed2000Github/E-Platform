@@ -42,7 +42,7 @@ class _MyHomePageState extends State<SchedulerPage> {
       dataSource: _getCalendarDataSource(collection));
   },
   future: DefaultAssetBundle.of(context)
-              .loadString("assets/sample.json"),
+              .loadString("assets/emploi.json"),
         ),
       ));
 }
