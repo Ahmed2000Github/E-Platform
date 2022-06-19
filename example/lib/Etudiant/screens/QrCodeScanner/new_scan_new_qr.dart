@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'ar_screen.dart';
-
+// [UnivIt : Errouk Ismail]
 class NewScanNewQr extends StatefulWidget {
   const NewScanNewQr({Key key}) : super(key: key);
 
@@ -95,6 +95,7 @@ class _AppStateQr extends State<NewScanNewQr> {
     );
   }
 
+// [UnivIt : Errouk Ismail]
   Future<void> _scanQr(BuildContext context) async {
     String modelUrl;
     try {
@@ -134,6 +135,7 @@ class _AppStateQr extends State<NewScanNewQr> {
   }
 }
 
+// [UnivIt : Errouk Ismail]
 Widget flatButton(BuildContext context, String text, Widget widget) {
   return FlatButton(
     padding: EdgeInsets.all(15.0),
