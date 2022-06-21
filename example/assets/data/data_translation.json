@@ -1,0 +1,7 @@
+{
+  "data_en": { "helloworld": "hello world", "hi": "hi!" },
+  "data_fr": {
+    "helloworld": "bienvenue monde",
+    "hi": "salut!"
+  }
+}

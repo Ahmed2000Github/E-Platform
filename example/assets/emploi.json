@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Conduite de projet",
+    "start": "20/06/2022 08:00:00",
+    "end": "20/06/2022 10:00:00",
+    "color": "0xffb74093"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "20/06/2022 10:00:00",
+    "end": "20/06/2022 11:00:00",
+    "color": "0xffb740"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "20/06/2022 11:00:00",
+    "end": "20/06/2022 12:00:00",
+    "color": "0xffb84093"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "20/06/2022 14:00:00",
+    "end": "20/06/2022 16:00:00",
+    "color": "0xffb54093"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "21/06/2022 08:00:00",
+    "end": "21/06/2022 10:00:00",
+    "color": "0xffb14093"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "21/06/2022 10:00:00",
+    "end": "21/06/2022 11:00:00",
+    "color": "0xffb940"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "22/06/2022 11:00:00",
+    "end": "22/06/2022 12:00:00",
+    "color": "0xffb14093"
+  },
+  {
+    "name": "Conduite de projet",
+    "start": "23/06/2022 14:00:00",
+    "end": "23/06/2022 16:00:00",
+    "color": "0xffb74093"
+  }
+]

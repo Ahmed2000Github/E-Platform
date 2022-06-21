@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/widgets/menu_item.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/scheduler_page.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/Absencepage.dart';
 
 
 class SideBar extends StatefulWidget {
@@ -136,10 +137,23 @@ final _animationDuration = const Duration(milliseconds: 500);
                         indent: 32,
                         endIndent: 32,
                       ),
-                      // MenuItem(
-                      //   icon: Icons.settings,
-                      //   title: "Settings",
-                      // ),
+                     MenuItem(
+                       icon: Icons.settings,
+                         title: "Mes absences",
+                         onTap: () {
+                          Navigator.push(
+                             context,
+                           MaterialPageRoute(builder: (context) => const AbsencePage()),
+                            );
+                        },
+                       ),
+                       Divider(
+                        height: 64,
+                        thickness: 0.5,
+                        color: Colors.white.withOpacity(0.3),
+                        indent: 32,
+                        endIndent: 32,
+                      ),
                        MenuItem(
                         icon: Icons.exit_to_app,
                         title: "Logout",

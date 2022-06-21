@@ -1,5 +1,14 @@
+import 'dart:convert';
+
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/main_page.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
+import 'package:arcore_flutter_plugin_example/utils.dart';
+import 'package:arcore_flutter_plugin_example/utils_data.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key key}) : super(key: key);
@@ -34,17 +43,20 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
         title: Text(
           "Settings",
-          style: TextStyle(fontSize: 22),
+          style: TextStyle(fontSize: 22, color: Colors.black),
         ),
         leading: IconButton(
             onPressed: () {
-              //page de retour
+              Navigator.pop(context,
+                  MaterialPageRoute(builder: (context) => (MainPage())));
             },
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.white,
+              color: Colors.black,
             )),
       ),
       body: Container(
@@ -106,40 +118,41 @@ class _SettingsPageState extends State<SettingsPage> {
             buildAccountOption(context, "Content Settings"),
             buildAccountOption(context, "langage "),
             buildAccountOption(context, "privacy and  Security"),
+            TextButton(onPressed: () async {}, child: Text("Francais")),
           ],
         ),
       ),
     );
   }
+}
 
-  Padding buildNotificationOption(
-      String title, bool value, Function onChangedMethod) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[600]),
-          ),
-          Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
-                activeColor: Colors.lightBlue,
-                trackColor: Colors.grey,
-                value: value,
-                onChanged: (bool newValue) {
-                  onChangedMethod(newValue);
-                }),
-          )
-        ],
-      ),
-    );
-  }
+Padding buildNotificationOption(
+    String title, bool value, Function onChangedMethod) {
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600]),
+        ),
+        Transform.scale(
+          scale: 0.7,
+          child: CupertinoSwitch(
+              activeColor: Colors.lightBlue,
+              trackColor: Colors.grey,
+              value: value,
+              onChanged: (bool newValue) {
+                onChangedMethod(newValue);
+              }),
+        )
+      ],
+    ),
+  );
 }
 
 GestureDetector buildAccountOption(BuildContext context, String title) {
@@ -152,7 +165,11 @@ GestureDetector buildAccountOption(BuildContext context, String title) {
               title: Text(title),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [Text("option 1"), Text("Option 2")],
+                children: [
+                  TextButton(onPressed: () {}, child: Text("Francais")),
+                  TextButton(onPressed: () {}, child: Text("Anglais")),
+                  TextButton(onPressed: () {}, child: Text("Arabe")),
+                ],
               ),
               actions: [
                 TextButton(

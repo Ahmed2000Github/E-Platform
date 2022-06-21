@@ -14,7 +14,7 @@ class EtudiantProvider with ChangeNotifier {
   }
 
   fetchEtudiant() async {
-    final url = 'http://192.168.1.2:8080/apis/v1/?format=json';
+    final url = 'http://192.168.129.201:8080/apis/v1/?format=json';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       var data = json.decode(response.body) as List;

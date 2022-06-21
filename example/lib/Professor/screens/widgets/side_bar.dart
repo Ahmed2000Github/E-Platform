@@ -9,7 +9,7 @@ import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/scheduler_p
 import '../views/ScanScreen.dart';
 import '../views/PresenceList.dart';
 import '../views/LunchCamera.dart';
-
+import '../views/globals.dart' as globals;
 class SideBar extends StatefulWidget {
   const SideBar({Key key}) : super(key: key);
 
@@ -102,25 +102,7 @@ class _SideBarState extends State<SideBar>
                         color: Colors.white.withOpacity(0.3),
                         indent: 32,
                         endIndent: 32,
-                      ),
-                      MenuItem(
-                        icon: Icons.qr_code,
-                        title: "Scan QR Code",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ScanScreen()),
-                          );
-                        },
-                      ),
-                      Divider(
-                        height: 6,
-                        thickness: 0.5,
-                        color: Colors.white.withOpacity(0.3),
-                        indent: 32,
-                        endIndent: 32,
-                      ),
+                      ),Visibility(child:
                       MenuItem(
                         icon: Icons.checklist,
                         title: "Liste de présence",
@@ -131,7 +113,7 @@ class _SideBarState extends State<SideBar>
                                 builder: (context) => ListePresence()),
                           );
                         },
-                      ),
+                      ),visible: globals.visiblepres,),
                       Divider(
                         height: 6,
                         thickness: 0.5,

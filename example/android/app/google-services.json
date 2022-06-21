@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "694953913712",
-    "project_id": "textrecognition-24fe3",
-    "storage_bucket": "textrecognition-24fe3.appspot.com"
+    "project_number": "69643586988",
+    "project_id": "signin-9f29c",
+    "storage_bucket": "signin-9f29c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:694953913712:android:4eea5c1581f3d3408533b5",
+        "mobilesdk_app_id": "1:69643586988:android:efad84308f10f8aed03e09",
         "android_client_info": {
           "package_name": "com.difrancescogianmarco.digilearn1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "694953913712-kbben5ejnr73nni15fplukj5lqho0dsj.apps.googleusercontent.com",
+          "client_id": "69643586988-je77pqe41vancc528gjl9u99theftv4b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBlcm4T9omhhnOcLPTnmIAK95H15bBhbHA"
+          "current_key": "AIzaSyDX5tnzM3h5BoXtO8BHKi5fFz-eQePaKP8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "694953913712-kbben5ejnr73nni15fplukj5lqho0dsj.apps.googleusercontent.com",
+              "client_id": "69643586988-je77pqe41vancc528gjl9u99theftv4b.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
