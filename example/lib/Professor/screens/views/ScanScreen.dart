@@ -136,7 +136,7 @@ bool equalsIgnoreCase(String string1, String string2) {
        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Présence validé pour : " + globals.nametobecorrected),
         ));
-      final url = 'http://192.168.129.201:8000/emploie/api/modifier-presence/' +
+      final url = 'http://192.168.88.201:8000/emploie/api/modifier-presence/' +
           globals.seancetobecorrected.toString() +
           "/" +
           globals.idtobecorrected.toString();

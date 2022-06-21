@@ -23,7 +23,7 @@ class _StartCameraState extends State<StartCamera> {
   void initState() {
     super.initState();
     startLive();
-    Future.delayed(Duration(seconds: 15), () {
+    Future.delayed(Duration(seconds: 25), () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ListePresence()),
@@ -47,7 +47,7 @@ class _StartCameraState extends State<StartCamera> {
 
   Future<void> startLive() async {
     final url =
-        Uri.parse('http://192.168.129.201:8000/face-recognition/mobile/salle');
+        Uri.parse('http://192.168.88.201:8000/face-recognition/mobile/salle');
     final headers = {"Content-type": "application/json"};
     final jsonm = '{"title": "Hello", "body":"' +
         globals.salleId.toString() +

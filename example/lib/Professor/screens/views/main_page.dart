@@ -16,10 +16,17 @@ class MainPage extends StatelessWidget {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => WelcomePageProf()));
           },
-          child: Text(
-            'Espace Professor',
-            style: TextStyle(fontSize: 23),
-          ),
+          child:Container(
+                  child:(
+                    Text("Espace Professeur",style:TextStyle(fontSize:20))
+                    ),
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/prof/teacher.png"),
+                        fit: BoxFit.fitHeight),
+                  ),
+                ) 
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(

@@ -57,7 +57,7 @@ class _ListePresenceState extends State<ListePresence> {
                                 CircleAvatar(
                                   radius: 10.0,
                                   backgroundImage: NetworkImage(
-                                      "http://192.168.129.201:8000/emploie/api/get-photo/media/photo.jpg"),
+                                      "http://192.168.88.201:8000/emploie/api/get-photo/media/photo.jpg"),
                                   backgroundColor: Colors.transparent,
                                 ),
                                 CircleAvatar(

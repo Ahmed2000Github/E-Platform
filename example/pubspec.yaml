@@ -80,6 +80,7 @@ flutter:
     - assets/images/
     - assets/svg/
     - assets/prof/
+    - assets/prof/teacher.png
     - assets/emploi.json
     - assets/absence.json
     - assets/data/
