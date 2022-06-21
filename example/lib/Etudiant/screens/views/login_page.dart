@@ -1,6 +1,7 @@
 // import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/sign_up_page.dart';
 import 'dart:convert';
 
+import 'package:arcore_flutter_plugin_example/Etudiant/models/utils.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -152,12 +153,12 @@ class _LoginPageState extends State<LoginPage> {
                       child: MaterialButton(
                         minWidth: double.infinity,
                         height: 60,
-                        onPressed: () {
-                           Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>WelcomePage())
-                            );
+                        onPressed: () async {
+                           // Navigator.push(context,
+                           //  MaterialPageRoute(builder: (context)=>WelcomePage())
+                           //  );
                           // Auth Mobile est commenté car le backend n'est pas encore prêt
-                          // await doAuthStudent(context);
+                          await doAuthStudent(context);
                         },
                         color: Color(0xff0095FF),
                         elevation: 0,
@@ -221,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
 // [UnivIt : Errouk Ismail]
 Future<User> fetchData(UserDto userDto) async {
   final response = await http.post(
-    Uri.parse('http://abed-196-127-177-30.ngrok.io/users/signin'),
+    Uri.parse('https://c6cb-102-52-176-16.eu.ngrok.io/api/login'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -231,7 +232,7 @@ Future<User> fetchData(UserDto userDto) async {
     }),
   );
 
-  if (response.statusCode == 201) {
+  if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     return User.fromMap(jsonDecode(response.body));
@@ -276,6 +277,7 @@ void doAuthStudent(BuildContext context) async {
 
     if (auth == 1) {
       if(user.type_user=="3"){
+        Utils.token=user.token;
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => WelcomePage()));
       }
