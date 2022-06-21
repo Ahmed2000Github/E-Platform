@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'globals.dart' as globals;
+import '../../../Etudiant/models/utils.dart';
 
 List _etudiant = globals.data;
 List _etablissements = [
@@ -136,7 +137,7 @@ bool equalsIgnoreCase(String string1, String string2) {
        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Présence validé pour : " + globals.nametobecorrected),
         ));
-      final url = 'http://192.168.88.201:8000/emploie/api/modifier-presence/' +
+      final url = Utils.RootUrl+'/emploie/api/modifier-presence/' +
           globals.seancetobecorrected.toString() +
           "/" +
           globals.idtobecorrected.toString();

@@ -7,6 +7,7 @@ import 'package:arcore_flutter_plugin_example/Database/openDB/myDb.dart';
 import 'package:arcore_flutter_plugin_example/Professor/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'globals.dart' as globals;
 
 import '../../../Etudiant/models/utils.dart';
 
@@ -20,12 +21,9 @@ class LoginPageProf extends StatefulWidget {
 var profEmailController = TextEditingController();
 var profPasswordController = TextEditingController();
 
-
 class _LoginPageProfState extends State<LoginPageProf> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -220,15 +218,14 @@ class _LoginPageProfState extends State<LoginPageProf> {
 
 // [UnivIt : Errouk Ismail]
 Future<User> fetchData(UserDto userDto) async {
+  print(Utils.RootUrl + '/api/login');
   final response = await http.post(
-    Uri.parse('https://c6cb-102-52-176-16.eu.ngrok.io/api/login'),
+    Uri.parse(Utils.RootUrl + '/api/login'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
-      'email': userDto.email,
-      'password': userDto.password
-    }),
+    body: jsonEncode(
+        <String, String>{'email': userDto.email, 'password': userDto.password}),
   );
 
   if (response.statusCode == 200) {
@@ -250,10 +247,9 @@ void doAuth(BuildContext context) async {
   UserDto userDto = new UserDto(
       email: profEmailController.text, password: profPasswordController.text);
   await fetchData(userDto).then((value) => user = value);
-  if(user==null){
-    ScaffoldMessenger.of(context).showSnackBar(new SnackBar
-      (content: Text("Email or Password is incorrect!!!")));
-
+  if (user == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+        new SnackBar(content: Text("Email or Password is incorrect!!!")));
   }
   dynamic txt = "";
   dynamic permission = 0;
@@ -270,19 +266,22 @@ void doAuth(BuildContext context) async {
           .getUsers()
           .then((value) => myTxt = value.first.username);
       auth = 1;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(new SnackBar(content: Text(myTxt)));
+      dynamic myUser;
+    await DatabaseHelper.instance
+        .getUsers()
+        .then((value) => myUser = value.first);
+    globals.loggedUserName=myUser.username;
+    print(myUser);
     }
 
     if (auth == 1) {
-      if(user.type_user=="2"){
-        Utils.token=user.token;
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePageProf()));
-      }
-     else{
-        ScaffoldMessenger.of(context)
-            .showSnackBar(new SnackBar(content: Text(user.username +" is not a Professor!!!!")));
+      if (user.type_user == "2") {
+        Utils.token = user.token;
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WelcomePageProf()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+            content: Text(user.username + " is not a Professor!!!!")));
       }
     }
   }

@@ -12,6 +12,7 @@ import 'CameraDetection.dart';
 import 'package:path_provider/path_provider.dart';
 import 'ListePresence.dart';
 import 'globals.dart' as globals;
+import '../../../Etudiant/models/utils.dart';
 
 class StartCamera extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _StartCameraState extends State<StartCamera> {
 
   Future<void> startLive() async {
     final url =
-        Uri.parse('http://192.168.88.201:8000/face-recognition/mobile/salle');
+        Uri.parse(Utils.RootUrl+'/face-recognition/mobile/salle');
     final headers = {"Content-type": "application/json"};
     final jsonm = '{"title": "Hello", "body":"' +
         globals.salleId.toString() +

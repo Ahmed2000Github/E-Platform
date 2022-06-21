@@ -3,6 +3,7 @@ import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_pag
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'welcome_page.dart';
+import 'globals.dart' as globals;
 
 class MainPage extends StatelessWidget {
   const MainPage({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class MainPage extends StatelessWidget {
           },
           child:Container(
                   child:(
-                    Text("Espace Professeur",style:TextStyle(fontSize:20))
+                    Text("Espace du Professeur: "+ globals.loggedUserName,style:TextStyle(fontSize:15))
                     ),
                   height: 200,
                   decoration: BoxDecoration(
@@ -29,33 +30,7 @@ class MainPage extends StatelessWidget {
                 ) 
         ),
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blueAccent,
-        items: <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.settings, size: 30),
-          Icon(Icons.person, size: 30),
-        ],
-        onTap: (index) {
-          //Handle button tap
-          print(index);
-          switch (index) {
-            case 0:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => WelcomePage()));
-              break;
-            case 1:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => WelcomePage()));
-              break;
-            case 2:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => WelcomePage()));
-              break;
-            default:
-          }
-        },
-      ),
+    
     );
   }
 }
