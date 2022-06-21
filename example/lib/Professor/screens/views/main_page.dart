@@ -28,6 +28,7 @@ class MainPage extends StatelessWidget {
                         fit: BoxFit.fitHeight),
                   ),
                 ) 
+          
         ),
       ),
     
