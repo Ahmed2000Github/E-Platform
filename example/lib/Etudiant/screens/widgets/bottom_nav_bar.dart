@@ -1,11 +1,46 @@
+import 'dart:ffi';
+
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../Database/openDB/myDb.dart';
 import '../size_configs.dart';
 import '../views/login_page.dart';
 import '../../../Professor/screens/views/login_page.dart';
-
+import '../views/welcome_page.dart';
+Future<bool> isLoggedStudent(BuildContext context) async {
+  dynamic user ="";
+  await DatabaseHelper.instance.getUsers().then((value) => {
+    if(value.length>0){
+      user=value.last.type_user
+    }
+  });
+  if(user=="3"){
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePage()));
+    return true;
+  }
+  else{
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+  return false;
+  }
+}
+Future<bool> isLoggedProf(BuildContext context) async {
+  dynamic user ="";
+  await DatabaseHelper.instance.getUsers().then((value) => {
+    if(value.length>0){
+      user=value.last.type_user
+    }
+  });
+  if(user=="2"){
+    return true;
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePageProf()));
+  }else{
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageProf()));
+    return false;
+  }
+}
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     Key key,
@@ -13,7 +48,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  body: 
+  body:
   Stack(
         children: <Widget>[
          Container(
@@ -75,29 +110,40 @@ class BottomNavBar extends StatelessWidget {
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
                         // fit: BoxFit.cover,
-                       
+
                      children: <Widget>[
                          CategoryCard(
                          title: "Teacher Area",
                          svgSrc: "assets/images/prof.svg",
-                          press: () {
-                            Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>LoginPageProf())
-                            );
-                          },
+                          press: () async {
+                            bool logged = await isLoggedProf(context);
+                            if (logged == true) {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => WelcomePageProf()));
+                            } else
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => LoginPageProf()));
+                          }
                         ), // categorycard
                           CategoryCard(
                          title: "Student Area",
                          svgSrc: "assets/images/student.svg",
-                          press: () {
-                             Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>LoginPage())
-                            );
+                          press: () async{
+                          bool logged = await isLoggedStudent(context);
+                          print(logged.toString());
+                          if (logged == true) {
+                          Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => WelcomePage()));
+                          } else
+                          Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => LoginPage()));
+
+
                           },
                         ), // categorycard
                        ], // widget
-                 ),// Gridview 
-                ),// Expanded  
+                 ),// Gridview
+                ),// Expanded
                 //  Center(
                 //  child: Container(
                 //  margin: const EdgeInsets.all(10.0),
@@ -110,7 +156,7 @@ class BottomNavBar extends StatelessWidget {
                 ], //widget
                ), //Padding
              ), //column
-          ), //safeArea 
+          ), //safeArea
         ],  //widget
       ),   //stack
 );

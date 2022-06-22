@@ -1,6 +1,9 @@
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
+import 'package:arcore_flutter_plugin_example/Professor/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../Database/openDB/myDb.dart';
 import '../widgets/bottom_nav_bar.dart';
 import './onboarding_page.dart';
 
@@ -14,7 +17,7 @@ final padding = EdgeInsets.symmetric(horizontal: 20);
     return Scaffold(
        bottomNavigationBar: BottomNavBar(),
       );  //scaffold
-      
+
 }
 }
 class CategoryCard extends StatelessWidget {
@@ -30,7 +33,10 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return
+
+
+      ClipRRect(
       borderRadius: BorderRadius.circular(13),
       child: Container(
         // padding: EdgeInsets.all(20),
@@ -46,7 +52,8 @@ class CategoryCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Material(
+        child:
+        Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: press,

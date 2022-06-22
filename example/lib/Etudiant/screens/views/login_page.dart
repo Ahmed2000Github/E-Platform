@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:arcore_flutter_plugin_example/Etudiant/models/utils.dart';
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/home_page.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,19 @@ import 'package:http/http.dart' as http;
 
 import '../../../Database/openDB/myDb.dart';
 
+
+
+// void isLogged(BuildContext context) async {
+//   dynamic user ="";
+//   await DatabaseHelper.instance.getUsers().then((value) => user=value.last.type_user.toString());
+//   if(user.type_user=="3"){
+//     Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePage()));
+//   }
+//   else if(user.type_user=="2"){
+//     Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomePageProf()));
+//
+//   }
+// }
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key key }) : super(key: key);
 
@@ -20,9 +34,17 @@ class LoginPage extends StatefulWidget {
 var studentEmailController = TextEditingController();
 var studentPasswordController = TextEditingController();
 class _LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
-    return 
+    return WillPopScope(
+    onWillPop: (){
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage()),
+            (Route<dynamic> route) => false,
+      );
+    },
+    child:
        Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -215,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
-    );
+       ));
   }
 
 }

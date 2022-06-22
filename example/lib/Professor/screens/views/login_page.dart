@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../Etudiant/models/utils.dart';
+import '../../../Etudiant/screens/views/home_page.dart';
 
 class LoginPageProf extends StatefulWidget {
   const LoginPageProf({Key key}) : super(key: key);
@@ -26,7 +27,15 @@ class _LoginPageProfState extends State<LoginPageProf> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: (){
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage()),
+            (Route<dynamic> route) => false,
+      );
+    },
+    child:
+      Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -214,7 +223,7 @@ class _LoginPageProfState extends State<LoginPageProf> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
