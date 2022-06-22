@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:arcore_flutter_plugin_example/Etudiant/models/utils.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/TextScanner/ar_view_screen.dart';
 import 'package:http/http.dart';
 
@@ -11,6 +12,7 @@ import 'dart:io';
 import 'controls_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class TextRecognitionWidget extends StatefulWidget {
   final color;
@@ -29,38 +31,48 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   File filteredImage;
   var modelsList = [];
   bool modelsFound = false;
-  final uri = Uri.parse('https://text-recog.herokuapp.com/identify');
+  bool isFiltering = false;
+  final color_uri = Uri.parse('https://text-recog.herokuapp.com/identify');
+  final models_uri = Uri.parse(Utils.RootUrl + "/cours/getTextTraitement");
 
   @override
   Widget build(BuildContext context) => Expanded(
-        child: Column(
-          children: [
-            Expanded(child: buildImage()),
-            const SizedBox(height: 16),
-            ControlsWidget(
-              onClickedPickImage: pickImageFromGallery,
-              onClickedTakeImage: pickImageFromCamera,
-            ),
-            const SizedBox(width: 7),
-            image != null
-                ? ElevatedButton(
-                    onPressed: clear,
-                    child: Text('Clear'),
-                  )
-                : const SizedBox(width: 1),
-            filteredImage != null
-                ? ElevatedButton(
-                    onPressed: scanText,
-                    child: Text(
-                      'Scan For Text',
-                      style: TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
-                    ),
-                  )
-                : SizedBox(
-                    width: 8,
+        child: isFiltering
+            ? Center(
+                child: SpinKitRotatingCircle(
+                  color: Color.fromARGB(255, 16, 151, 255),
+                  size: 50.0,
+                ),
+              )
+            : Column(
+                children: [
+                  Expanded(child: buildImage()),
+                  const SizedBox(height: 16),
+                  ControlsWidget(
+                    onClickedPickImage: pickImageFromGallery,
+                    onClickedTakeImage: pickImageFromCamera,
                   ),
-          ],
-        ),
+                  const SizedBox(width: 7),
+                  image != null
+                      ? ElevatedButton(
+                          onPressed: clear,
+                          child: Text('Clear'),
+                        )
+                      : const SizedBox(width: 1),
+                  filteredImage != null
+                      ? ElevatedButton(
+                          onPressed: scanText,
+                          child: Text(
+                            'Scan For Text',
+                            style:
+                                TextStyle(fontFamily: 'OoohBaby', fontSize: 14),
+                          ),
+                        )
+                      : SizedBox(
+                          width: 8,
+                        ),
+                ],
+              ),
       );
 
   Widget buildImage() => Container(
@@ -107,12 +119,14 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   }
 
   Future filterImageInServer(File imageToBeFiltered) async {
+    setIsFiltering(true);
     //convert image file to bytes
     Uint8List imagebytes = await imageToBeFiltered.readAsBytes();
     //convert bytes to base64 string
     String base64string = base64.encode(imagebytes);
 
     //prepare the request data
+
     final headers = {'Content-Type': 'application/json'};
     Map<String, dynamic> body = {'color': widget.color, 'bytes': base64string};
     String jsonBody = json.encode(body);
@@ -120,11 +134,13 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     try {
       print("Sending post method");
       Response response = await post(
-        uri,
+        color_uri,
         headers: headers,
         body: jsonBody,
         encoding: encoding,
       );
+
+      setIsFiltering(false);
       print("getting response with status: " + response.statusCode.toString());
 
       //decode the response and get the 64base image
@@ -139,6 +155,7 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
         final appDir = await getTemporaryDirectory();
         File file = File('${appDir.path}/img.jpg');
         await file.writeAsBytes(decodedBytes);
+        setIsFiltering(false);
         setFilteredImage(File(file.path));
       }
     } catch (er) {
@@ -147,30 +164,17 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
   }
 
   Future scanText() async {
-    final text = await FirebaseMLApi.recogniseText(filteredImage);
+    final String text = await FirebaseMLApi.recogniseText(image);
 
     //print text to console
     developer.log("here it cooomes:  " + text);
     setText(text);
 
-    //TODO
+    //Prpare the text
+
+    print(text);
+    fetchModels(Utils.chapitreId, text);
     //here we need to show a loading spinner with the text found from mlkit
-
-    //fetch 3d models links from backend
-    final fetchedList = [
-      "https://raw.githubusercontent.com/Ahmed2000Github/Models/master/sun/sun.gltf",
-    ];
-
-    //change the state
-    setModelsList(fetchedList);
-    setModelsFound(true);
-    if (modelsFound) {
-      Navigator.push(
-          context,
-          new MaterialPageRoute(
-              builder: (context) =>
-                  new TextArViewScreen(modelsList: modelsList)));
-    }
   }
 
   void clear() {
@@ -203,9 +207,66 @@ class _TextRecognitionWidgetState extends State<TextRecognitionWidget> {
     });
   }
 
+  void setIsFiltering(boolean) {
+    setState(() {
+      isFiltering = boolean;
+    });
+  }
+
   void setModelsFound(boolean) {
     setState(() {
       modelsFound = boolean;
     });
+  }
+
+  Future fetchModels(String id, String text_param) async {
+    //prepare the request data
+    String words = text_param
+        .split(
+            RegExp([" ", ";", ",", ".", "+", "-"].map(RegExp.escape).join('|')))
+        .join(",");
+    developer.log("splited:  " + words);
+    final headers = {'Content-Type': 'application/json'};
+    Map<String, dynamic> body = {'chapitre_id': id, 'text': words.trim()};
+    String jsonBody = json.encode(body);
+    final encoding = Encoding.getByName('utf-8');
+    try {
+      print("Sending post method");
+      Response response = await post(
+        models_uri,
+        headers: headers,
+        body: jsonBody,
+        encoding: encoding,
+      );
+      print("getting response with status: " + response.statusCode.toString());
+
+      if (response.statusCode == 404) {
+        print("Model Not Found !");
+      } else {
+        //decode the response and get the 64base image
+        var jsonResponse = jsonDecode(response.body);
+        String model_img = jsonResponse['path_file'];
+
+        developer.log("here it cooomes:  " + model_img);
+
+        //fetch 3d models links from backend
+        final fetchedList = [
+          model_img,
+        ];
+
+        //change the state
+        setModelsList(fetchedList);
+        setModelsFound(true);
+      }
+      if (modelsFound) {
+        Navigator.push(
+            context,
+            new MaterialPageRoute(
+                builder: (context) =>
+                    new TextArViewScreen(model: modelsList[0])));
+      }
+    } catch (er) {
+      print(er.toString());
+    }
   }
 }

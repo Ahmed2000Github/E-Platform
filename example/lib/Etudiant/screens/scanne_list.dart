@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import '../models/distant_image_asset.dart';
 import 'package:http/http.dart' as http;
 import '../models/utils.dart';
-import 'QrCodeScanner/new_scan_new_qr.dart';
 import 'multiple_augmented_images.dart';
 
 // classe represente l'activite de choix de l'option de scan
@@ -211,12 +210,7 @@ class ChoiceListView extends StatelessWidget {
                         );
                         break;
                       case 2:
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NewScanNewQr()),
-                          (Route<dynamic> route) => false,
-                        );
+                        ;
                         break;
                       case 3:
                         Navigator.pushAndRemoveUntil(

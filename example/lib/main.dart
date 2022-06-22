@@ -7,7 +7,6 @@ import 'Etudiant/screens/views/onboarding_page.dart';
 // import 'Etudiant/screens/start_activity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 bool seenOnboard;
 void main() async {
   runApp(MyApp());
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'irisiApp',
-       theme: ThemeData(
+      theme: ThemeData(
         textTheme: GoogleFonts.manropeTextTheme(
           Theme.of(context).textTheme,
         ),

@@ -14,7 +14,7 @@ class ColorPickerScreen extends StatelessWidget {
           (Route<dynamic> route) => false,
         );
       },
-      child:Home(),
+      child: Home(),
     );
   }
 }
@@ -30,17 +30,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Flutter Color Picker"),
-          backgroundColor: Colors.redAccent,
-          leading: IconButton(
-             icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => ScanneList()),
-                (Route<dynamic> route) => false,
-              );
-            },)
-        ),
+            title: Text("Flutter Color Picker"),
+            backgroundColor: Color.fromARGB(255, 0, 113, 170),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => ScanneList()),
+                  (Route<dynamic> route) => false,
+                );
+              },
+            )),
         body: Container(
             color: mycolor, //background color of app from color picker
 
