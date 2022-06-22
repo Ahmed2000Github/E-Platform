@@ -6,6 +6,7 @@ import 'dart:developer';
 import '../../models/Niveau.dart';
 import 'globals.dart' as globals;
 import 'StartCamera.dart';
+import '../../../Etudiant/models/utils.dart';
 
 class GetLevels extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _GetLevelsState extends State<GetLevels> {
 
   Future<List<Niveau>> getNiveausList() async {
     final response = await http.get(Uri.parse(
-        "http://192.168.129.201:8000/mobile/niveau/" + globals.selectedSalle));
+        Utils.RootUrl+"/mobile/niveau/" + globals.selectedSalle));
 
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
     List<Niveau> niveaus = items.map<Niveau>((json) {

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'globals.dart' as globals;
 
 import 'package:flutter/services.dart';
+import '../../../Etudiant/models/utils.dart';
 
 class ListePresence extends StatefulWidget {
   @override
@@ -56,13 +57,35 @@ class _ListePresenceState extends State<ListePresence> {
                               leading: Column(children: <Widget>[
                                 CircleAvatar(
                                   radius: 10.0,
-                                  backgroundImage: NetworkImage(
-                                      "http://192.168.129.201:8000/emploie/api/get-photo/media/photo.jpg"),
+                                  backgroundImage: NetworkImage(Utils.RootUrl +
+                                      "/emploie/api/get-photo" +
+                                      _items[index]["etudiant"]["profil_pic"]
+                                          .substring(
+                                              6,
+                                              _items[index]["etudiant"]
+                                                      ["profil_pic"]
+                                                  .length)),
                                   backgroundColor: Colors.transparent,
                                 ),
                                 CircleAvatar(
-                                  child: Icon(Icons.person),
-                                  radius: 10,
+                                  radius: 10.0,
+                                  backgroundImage: NetworkImage(Utils.RootUrl +
+                                      "api/get-photo-from-backup/" +
+                                      _items[index]["seance"]["planning"]
+                                              ["groupe"]["niveau"]["filiere"]
+                                          ["nom_filiere"] +
+                                      "/" +
+                                      _items[index]["seance"]["planning"]
+                                          ["groupe"]["niveau"]["nom_niveau"] +
+                                      "/" +
+                                      _items[index]["seance"]["planning"]
+                                          ["groupe"]["nom_group"] +
+                                      "/" +
+                                      _items[index]["seance"]["id"].toString() +
+                                      "/" +
+                                      _items[index]["etudiant"]["id"]
+                                          .toString()),
+                                  backgroundColor: Colors.transparent,
                                 ),
                               ]),
                               title: Text(_items[index]["etudiant"]["user"]

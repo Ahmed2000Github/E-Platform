@@ -7,6 +7,8 @@ import 'dart:developer';
 import '../../models/Salle.dart';
 import 'GetLevels.dart';
 import 'globals.dart' as globals;
+import '../../../Etudiant/models/utils.dart';
+import '../../../Database/openDB/myDb.dart';
 
 class LunchCamera extends StatefulWidget {
   @override
@@ -24,8 +26,9 @@ class _LunchCameraState extends State<LunchCamera> {
   }
 
   Future<List<Salle>> getSallesList() async {
-    final response = await http.get(
-        Uri.parse("http://192.168.129.201:8000/face-recognition/mobile/salles"));
+    
+    final response = await http
+        .get(Uri.parse(Utils.RootUrl + "/face-recognition/mobile/salles"));
 
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
     List<Salle> salles = items.map<Salle>((json) {
@@ -33,8 +36,6 @@ class _LunchCameraState extends State<LunchCamera> {
     }).toList();
     return salles;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

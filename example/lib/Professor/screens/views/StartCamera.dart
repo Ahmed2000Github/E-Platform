@@ -12,6 +12,8 @@ import 'CameraDetection.dart';
 import 'package:path_provider/path_provider.dart';
 import 'ListePresence.dart';
 import 'globals.dart' as globals;
+import '../../../Etudiant/models/utils.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class StartCamera extends StatefulWidget {
   @override
@@ -23,7 +25,7 @@ class _StartCameraState extends State<StartCamera> {
   void initState() {
     super.initState();
     startLive();
-    Future.delayed(Duration(seconds: 15), () {
+    Future.delayed(Duration(seconds: 25), () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ListePresence()),
@@ -34,20 +36,26 @@ class _StartCameraState extends State<StartCamera> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Live Started'),
-        backgroundColor: Colors.blue[900],
-      ),
-      body: Center(
-        //ZIDI SOINNER
-        child: Text("please wait until the camera finishes"),
-      ),
-    );
+        appBar: AppBar(
+          title: Text('Live Started'),
+          backgroundColor: Colors.blue[900],
+        ),
+        // body: Center(
+        //   //ZIDI SOINNER
+        //   child: Text("please wait until the camera finishes"),
+        // ),
+
+        body:  Center(
+          child: SpinKitFadingGrid(
+            color: Colors.blue.shade900,
+          )
+             ),
+        
+        );
   }
 
   Future<void> startLive() async {
-    final url =
-        Uri.parse('http://192.168.129.201:8000/face-recognition/mobile/salle');
+    final url = Uri.parse(Utils.RootUrl + '/face-recognition/mobile/salle');
     final headers = {"Content-type": "application/json"};
     final jsonm = '{"title": "Hello", "body":"' +
         globals.salleId.toString() +
