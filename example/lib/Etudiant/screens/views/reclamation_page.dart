@@ -62,10 +62,10 @@ class _ReclamationPageState extends  State<ReclamationPage> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Text( "Module : conduite de projet",
+                    Text( "Réclamation d'abscence",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
                     SizedBox(height: 20,),
-                    Text(" Email prof : jimouhsami@gmail.com",
+                    Text(" Un email sera envoyé au prof du module",
                     style: TextStyle(
                       fontSize: 15,
                     color:Colors.grey[700]),)
@@ -144,7 +144,7 @@ try {
 }*/
 
 
-  var url = Uri.parse("mailto:jimouhsami@gmail.com?subject=Réclamation de présence&body=Bonjour, L'étudiant .. réclame qu'il a été présent durant l'examen du module ..");
+  var url = Uri.parse("mailto:jimouhsami@gmail.com?subject=Réclamation de présence&body=Bonjour, Un étudiant réclame qu'il a été présent durant ....");
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
