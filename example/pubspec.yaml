@@ -42,7 +42,6 @@ dependencies:
   hexcolor: ^2.0.7
   gallery_saver: ^2.3.2
   mailer: ^5.1.1
-
   # downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:

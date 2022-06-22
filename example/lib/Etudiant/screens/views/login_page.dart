@@ -154,11 +154,11 @@ class _LoginPageState extends State<LoginPage> {
                         minWidth: double.infinity,
                         height: 60,
                         onPressed: () async {
-                           // Navigator.push(context,
-                           //  MaterialPageRoute(builder: (context)=>WelcomePage())
-                           //  );
+                           Navigator.push(context,
+                            MaterialPageRoute(builder: (context)=>WelcomePage())
+                            );
                           // Auth Mobile est commenté car le backend n'est pas encore prêt
-                          await doAuthStudent(context);
+                          // await doAuthStudent(context);
                         },
                         color: Color(0xff0095FF),
                         elevation: 0,
@@ -222,8 +222,8 @@ class _LoginPageState extends State<LoginPage> {
 // [UnivIt : Errouk Ismail]
 Future<User> fetchData(UserDto userDto) async {
   final response = await http.post(
-    // Uri.parse(Utils.RootUrl+'/api/login'),
-    Uri.parse(Utils.RootUrl+'/users/signin'),
+    Uri.parse(Utils.RootUrl+'/api/login'),
+    // Uri.parse(Utils.RootUrl+'/users/signin'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -246,7 +246,7 @@ Future<User> fetchData(UserDto userDto) async {
 
 // [UnivIt : Errouk Ismail]
 void doAuthStudent(BuildContext context) async {
-  // ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: Text("email : "+profEmailController.text+ "  password : "+profPasswordController.text)));
+  // 'ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: Text("email : "+profEmailController.text+ "  password : "+profPasswordController.text)))';
   User user = null;
   dynamic connexion = "";
   UserDto userDto = new UserDto(
