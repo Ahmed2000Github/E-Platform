@@ -1,9 +1,12 @@
+import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/login_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/widgets/menu_item.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/scheduler_page.dart';
 import 'package:arcore_flutter_plugin_example/Etudiant/screens/views/Absencepage.dart';
+
+import '../../../Database/openDB/myDb.dart';
 
 
 class SideBar extends StatefulWidget {
@@ -154,10 +157,15 @@ final _animationDuration = const Duration(milliseconds: 500);
                         indent: 32,
                         endIndent: 32,
                       ),
-                       MenuItem(
-                        icon: Icons.exit_to_app,
-                        title: "Logout",
-                      ),
+                       GestureDetector(
+                         onTap: () async{
+                           await doLogoutStudent(context);
+                         },
+                         child: MenuItem(
+                           icon: Icons.exit_to_app,
+                           title: "Logout",
+                         ),
+                       )
                   ],
                 ),
                 ),
@@ -193,6 +201,22 @@ final _animationDuration = const Duration(milliseconds: 500);
     );
   }
 }
+void doLogoutStudent(BuildContext context) async{
+  dynamic lgout = 0;
+  await DatabaseHelper.instance.removeall().then((value) => lgout=1);
+  if(lgout==1){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context)=>LoginPage())
+    );
+  }
+  else{
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content:
+    Text("You can't logout!!")));
+
+  }
+}
+
+
 class CustomMenuClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

@@ -1,3 +1,4 @@
+import 'package:arcore_flutter_plugin_example/Database/openDB/myDb.dart';
 import 'package:arcore_flutter_plugin_example/Professor/screens/views/CameraDetection.dart';
 import 'package:arcore_flutter_plugin_example/Professor/screens/views/ListePresence.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '../views/ScanScreen.dart';
 import '../views/PresenceList.dart';
 import '../views/LunchCamera.dart';
 import '../views/globals.dart' as globals;
+import '../views/login_page.dart';
 class SideBar extends StatefulWidget {
   const SideBar({Key key}) : super(key: key);
 
@@ -139,10 +141,15 @@ class _SideBarState extends State<SideBar>
                         indent: 32,
                         endIndent: 32,
                       ),
-                      MenuItem(
-                        icon: Icons.exit_to_app,
-                        title: "Logout",
-                      ),
+                      GestureDetector(
+                        onTap: () async{
+                            await doLogout(context);
+                        },
+                        child: MenuItem(
+                          icon: Icons.exit_to_app,
+                          title: "Logout",
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -175,6 +182,21 @@ class _SideBarState extends State<SideBar>
         );
       },
     );
+  }
+}
+
+void doLogout(BuildContext context) async{
+  dynamic lgout = 0;
+  await DatabaseHelper.instance.removeall().then((value) => lgout=1);
+  if(lgout==1){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context)=>LoginPageProf())
+    );
+  }
+  else{
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content:
+    Text("You can't logout!!")));
+
   }
 }
 

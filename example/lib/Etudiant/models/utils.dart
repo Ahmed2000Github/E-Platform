@@ -3,7 +3,7 @@ import 'distant_image_asset.dart';
 
 class Utils {
   // url de serveur
-  static final String RootUrl = "https://c6ff-102-51-46-143.eu.ngrok.io";
+   static final String RootUrl = "https://c6ff-102-51-46-143.eu.ngrok.io";
 
   // token de l'utilisateur
   static String token = "token here";
