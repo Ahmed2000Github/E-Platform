@@ -154,11 +154,11 @@ class _LoginPageState extends State<LoginPage> {
                         minWidth: double.infinity,
                         height: 60,
                         onPressed: () async {
-                           Navigator.push(context,
-                            MaterialPageRoute(builder: (context)=>WelcomePage())
-                            );
+                           // Navigator.push(context,
+                           //  MaterialPageRoute(builder: (context)=>WelcomePage())
+                           //  );
                           // Auth Mobile est commenté car le backend n'est pas encore prêt
-                          // await doAuthStudent(context);
+                          await doAuthStudent(context);
                         },
                         color: Color(0xff0095FF),
                         elevation: 0,
